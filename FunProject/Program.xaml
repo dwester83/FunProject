@@ -1,7 +1,7 @@
-﻿<Window x:Class="FunProject.MainWindow"
+﻿<Window x:Class="FunProject.Program"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Program" Height="350" Width="525">
     <Grid>
         
     </Grid>

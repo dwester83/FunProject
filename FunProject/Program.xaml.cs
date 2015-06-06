@@ -16,13 +16,17 @@ using System.Windows.Shapes;
 namespace FunProject
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Program.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Program : Window
     {
-        public MainWindow()
+        // Main program will load from here, we can edit whatever.
+        public Program()
         {
             InitializeComponent();
         }
+
+
+
     }
 }
