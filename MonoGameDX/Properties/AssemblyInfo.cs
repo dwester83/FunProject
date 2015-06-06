@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MonoGameDX")]
-[assembly: AssemblyProduct("MonoGameDX")]
+[assembly: AssemblyTitle("Game_DX")]
+[assembly: AssemblyProduct("Game_DX")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]

@@ -8,7 +8,7 @@
     <ProjectGuid>{FE945E9F-4BB2-4983-8DBC-0727967524C5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MonoGameDX</RootNamespace>
+    <RootNamespace>Game_DX</RootNamespace>
     <AssemblyName>MonoGameDX</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
