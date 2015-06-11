@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network", "Network\Network.csproj", "{D743B6C4-11F6-421E-896D-FE36DDAD259C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game_Network", "Network\Game_Network.csproj", "{D743B6C4-11F6-421E-896D-FE36DDAD259C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game_DX", "MonoGameDX\Game_DX.csproj", "{FE945E9F-4BB2-4983-8DBC-0727967524C5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D743B6C4-11F6-421E-896D-FE36DDAD259C} = {D743B6C4-11F6-421E-896D-FE36DDAD259C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{06483314-EF03-4EFF-B595-5528F5E13647}"
 EndProject
