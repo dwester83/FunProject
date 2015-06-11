@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network", "Network\Network.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game_DX", "MonoGameDX\Game_DX.csproj", "{FE945E9F-4BB2-4983-8DBC-0727967524C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{06483314-EF03-4EFF-B595-5528F5E13647}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,16 @@ Global
 		{FE945E9F-4BB2-4983-8DBC-0727967524C5}.Release|Mixed Platforms.Build.0 = Release|x86
 		{FE945E9F-4BB2-4983-8DBC-0727967524C5}.Release|x86.ActiveCfg = Release|x86
 		{FE945E9F-4BB2-4983-8DBC-0727967524C5}.Release|x86.Build.0 = Release|x86
+		{06483314-EF03-4EFF-B595-5528F5E13647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06483314-EF03-4EFF-B595-5528F5E13647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06483314-EF03-4EFF-B595-5528F5E13647}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{06483314-EF03-4EFF-B595-5528F5E13647}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{06483314-EF03-4EFF-B595-5528F5E13647}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{06483314-EF03-4EFF-B595-5528F5E13647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06483314-EF03-4EFF-B595-5528F5E13647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06483314-EF03-4EFF-B595-5528F5E13647}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{06483314-EF03-4EFF-B595-5528F5E13647}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{06483314-EF03-4EFF-B595-5528F5E13647}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
