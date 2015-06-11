@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MessageModel.cs" />
     <Compile Include="Service.cs" />
     <Page Include="GeneralControl.xaml">
       <SubType>Designer</SubType>

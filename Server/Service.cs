@@ -10,27 +10,34 @@ namespace Server
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Service : IService
     {
-        private static List<String> list = new List<string>();
+        // These are static for the moment until I make an object to actually contain them.
+        private static List<String> list = new List<String>();
+        private static List<String> userList = new List<String>();
 
-        public Boolean LogIn(String userName, String password)
+        private MessageModel messageModel;
+
+        public void LogIn(String userName, String password)
         {
-            return true;
+            list.Add("User :" + userName + " has logged on.");
+            userList.Add(userName);
         }
 
-        public Boolean LogOff(String userName, String password)
+        public void LogOff(String userName, String password)
         {
-            return true;
+            list.Add("User :" + userName + " has logged off.");
+            userList.Remove(userName);
         }
 
-        public Boolean SendMessage(String message)
+        public void SendMessage(String message)
         {
-            list.Add(message);
-            return true;
+            messageModel.getInstance();
+            messageModel.addMessage(message);
         }
 
-        public List<String> ReadMessages(int Lines)
+        public List<String> ReadMessages(int lines)
         {
-            return list;
+            messageModel.getInstance();
+            return messageModel.getMessages(lines);
         }
     }
 }

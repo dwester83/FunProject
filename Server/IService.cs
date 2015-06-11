@@ -11,15 +11,15 @@ namespace Server
     public interface IService
     {
         [OperationContract]
-        Boolean LogIn(String userName, String password);
+        void LogIn(String userName, String password);
 
         [OperationContract]
-        Boolean LogOff(String userName, String password);
+        void LogOff(String userName, String password);
 
         [OperationContract]
-        Boolean SendMessage(String message);
+        void SendMessage(String message);
 
         [OperationContract]
-        List<String> ReadMessages(int Lines);
+        List<String> ReadMessages(int lines);
     }
 }
