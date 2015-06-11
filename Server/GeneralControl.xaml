@@ -6,9 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="561">
     <Grid>
-        <Label Content="Status" Margin="10,10,0,0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" HorizontalAlignment="Left" Width="89"/>
-        <ListBox x:Name="listBox" Margin="10,41,10,10"/>
-        <Button x:Name="startBtn" Content="Start Server" VerticalAlignment="Top" Margin="0,12,10,0" HorizontalAlignment="Right" Width="102" Click="startBtn_Click"/>
+        <Label Content="Status" Margin="0" VerticalAlignment="Top" IsEnabled="False" FontWeight="Bold" HorizontalAlignment="Left" Width="89" RenderTransformOrigin="1.685,0.423"/>
+        <ListBox x:Name="listBox" Margin="0,31,0,0"/>
+        <Button x:Name="startBtn" Content="Start Services" VerticalAlignment="Top" Margin="0" HorizontalAlignment="Right" Width="102" Click="startBtn_Click"/>
 
     </Grid>
 </UserControl>

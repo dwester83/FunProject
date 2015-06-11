@@ -34,19 +34,21 @@ namespace Server
             if (host == null)
             {
                 // Start the service
-                Uri epAddress = new Uri("http://localhost:9001/Game");
+                Uri epAddress = new Uri("http://localhost:9001/Game/Message");
                 Uri[] uris = new Uri[] { epAddress };
 
-                Service service = new Service();
+                // Will move this to the App.Config after finalizing stuff.
+                MessageService service = new MessageService();
                 host = new ServiceHost(service, uris);
-                host.AddServiceEndpoint(typeof(IService), new WSHttpBinding(), "Game");
+                host.AddServiceEndpoint(typeof(IMessageService), new WSHttpBinding(), "Game/Message");
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
                 smb.HttpGetEnabled = true;
                 host.Description.Behaviors.Add(smb);
 
                 host.Open();
 
-                listBox.Items.Add("Service has started.\n");
+                listBox.Items.Add("MessageService has started.");
+                startBtn.Content = "Stop Services";
             }
             else
             {
@@ -54,7 +56,8 @@ namespace Server
                 host.Close();
                 host = null;
 
-                listBox.Items.Add("Service has ended.\n");
+                listBox.Items.Add("MessageService has ended.");
+                startBtn.Content = "Start Services";
             }
         }
 

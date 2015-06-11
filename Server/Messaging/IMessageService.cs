@@ -8,7 +8,7 @@ using System.Text;
 namespace Server
 {
     [ServiceContract]
-    public interface IService
+    public interface IMessageService
     {
         [OperationContract]
         void LogIn(String userName, String password);

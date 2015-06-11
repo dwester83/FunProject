@@ -8,13 +8,12 @@ namespace Server
 {
     class MessageModel
     {
-        // These are static for the moment until I make an object to actually contain them.
-        private List<String> messageList = new List<String>();
-        private List<String> userList = new List<String>();
+        // The singleton
+        private static MessageModel messageModel;
 
         private Object lockObject = new Object();
-
-        private static MessageModel messageModel;
+        private List<String> messageList = new List<String>();
+        private List<String> userList = new List<String>();
 
         private MessageModel()
         {
@@ -23,7 +22,7 @@ namespace Server
 
         public MessageModel getInstance()
         {
-            lock (lockObject)
+            lock (lockObject) // Locking for the moment, will probably remove.
             {
                 if (messageModel == null)
                 {
@@ -33,12 +32,16 @@ namespace Server
             }
         }
 
-
         public void addUser(String userName)
         {
-            // Place a timer to remove them.
-            userList.Add(userName);
+            if (!userList.Contains(userName))
+                userList.Add(userName);
+        }
 
+        public void removeUser(String userName)
+        {
+            if (userList.Contains(userName))
+                userList.Remove(userName);
         }
 
         public List<String> getMessages(int count)
@@ -46,7 +49,6 @@ namespace Server
             // Grab the last COUNT of messages, from the last one up.
             return messageList.Skip(Math.Max(0, messageList.Count() - count)).ToList<String>();
         }
-
 
         public void addMessage(String message)
         {
