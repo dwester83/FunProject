@@ -5,9 +5,9 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-namespace Server
+namespace Server.Messaging
 {
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(IMessageCallbackService))] //, SessionMode = SessionMode.Required)]
     public interface IMessageService
     {
         [OperationContract]
@@ -16,10 +16,7 @@ namespace Server
         [OperationContract]
         void LogOff(String userName, String password);
 
-        [OperationContract]
-        void SendMessage(String message);
-
-        [OperationContract]
-        List<String> ReadMessages(int lines);
+        [OperationContract(IsOneWay = true)]
+        void SendMessage(String userName, String message);
     }
 }

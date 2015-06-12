@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -37,13 +38,19 @@ namespace Server
                 Uri epAddress = new Uri("http://localhost:9001/Game/Message");
                 Uri[] uris = new Uri[] { epAddress };
 
+
+                //MessageCallbackService serviceCallback = new MessageCallbackService();
+                //InstanceContext instanceContext = new InstanceContext(serviceCallback);
+                //var pubsubProxy = new PubSubProxy.WcfPublisherContractClient(instanceContext);
+                //pubsubProxy.Subscribe();
+
                 // Will move this to the App.Config after finalizing stuff.
                 MessageService service = new MessageService();
                 host = new ServiceHost(service, uris);
                 host.AddServiceEndpoint(typeof(IMessageService), new WSHttpBinding(), "Game/Message");
                 ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
                 smb.HttpGetEnabled = true;
-                host.Description.Behaviors.Add(smb);
+                //host.Description.Behaviors.Add(smb);
 
                 host.Open();
 

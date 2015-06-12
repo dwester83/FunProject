@@ -66,10 +66,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Messaging\IMessageCallbackService.cs" />
+    <Compile Include="Messaging\MessageCallbackService.cs" />
     <Compile Include="Messaging\MessageControl.xaml.cs">
       <DependentUpon>MessageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Messaging\MessageModel.cs" />
     <Compile Include="Messaging\MessageService.cs" />
     <Page Include="GeneralControl.xaml">
       <SubType>Designer</SubType>

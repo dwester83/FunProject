@@ -5,39 +5,70 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-namespace Server
+namespace Server.Messaging
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)] // This is now a singleton that runs on several threads
     public class MessageService : IMessageService
     {
-        #region Private Properties
+        #region Private Variables
 
-        // Try this as a readonly property
-        private MessageModel MessageModel
-        {
-            get { return MessageModel.getInstance(); }
-        }
+        // Callback variable, used to send things based on events... like a new user or new message.
+        private IMessageCallbackService callback = null; // May need to be initialized...
+
+        private List<String> messageList = new List<String>();
+        private Dictionary<String, DateTime> userList = new Dictionary<String, DateTime>();
+        private DateTime lastClear = DateTime.Now;
 
         #endregion
 
+        public MessageService()
+        {
+            //callback = OperationContext.Current.GetCallbackChannel<IMessageCallbackService>();
+        }
+
         public void LogIn(String userName, String password)
         {
-            MessageModel.addUser(userName);
+            if (!userList.Keys.Contains(userName))
+                userList.Add(userName, DateTime.Now);
         }
 
         public void LogOff(String userName, String password)
         {
-            MessageModel.removeUser(userName);
+            if (userList.Keys.Contains(userName))
+                userList.Remove(userName);
         }
 
-        public void SendMessage(String message)
+        public void SendMessage(string userName, string message)
         {
-            MessageModel.addMessage(message);
+            var newStr = userName = ": " + message;
+
+
+            // Add it to the list
+            messageList.Add(newStr);
+
+            // Fire the event to update the new message
+            callback.NewMessage(newStr);
         }
 
-        public List<String> ReadMessages(int lines)
+        //public List<String> SendReadMessage(String userName, String message)
+        //{
+
+        //    messageList.Add(message);
+
+        //    // Can be used to get the last few messages?
+        //    // Grab the last COUNT of messages, from the last one up.
+        //    // return messageList.Skip(Math.Max(0, messageList.Count() - 20)).ToList<String>();
+        //}
+
+        private void clearOldUsers()
         {
-            return MessageModel.getMessages(lines);
+            if (DateTime.Now > lastClear)
+            {
+                userList.Clear();
+
+
+                lastClear = DateTime.Now.AddMinutes(1);
+            }
         }
     }
 }
