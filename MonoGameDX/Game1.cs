@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameShapes;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,7 +12,7 @@ namespace Game_DX
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        AbstractGameShape shape = new Hexagon(20);
         public Game1()
             : base()
         {
@@ -30,6 +31,7 @@ namespace Game_DX
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            shape.init(100, 100, GraphicsDevice, Color.Red, Color.Purple, Color.Black);
         }
 
         /// <summary>
@@ -77,7 +79,7 @@ namespace Game_DX
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            shape.draw(spriteBatch);
             base.Draw(gameTime);
         }
     }
