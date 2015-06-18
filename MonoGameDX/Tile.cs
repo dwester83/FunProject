@@ -14,15 +14,16 @@ namespace Game_DX
         public Vector2 Location { get; set; }
         public Vector2 Center 
         {
-            get { return new Vector2(Height/2, Width/2) ;}
+            get { return new Vector2(Location.X + (Width/2), Location.Y + (Height/2)) ; }
         }
         public float Height { get; set; }
         public float Width { get; set; }
         public object CollisionObject { get; set; }
+        public object  Tag { get; set; }
         public bool isSolid { get; set; }
         public bool isMoveable { get; set; }
 
-        public Tile()
+        public Tile(Vector2 location)
         {
 
         }
@@ -38,7 +39,7 @@ namespace Game_DX
 
         public void draw(SpriteBatch spritebatch)
         {
-
+            sprite.draw(spritebatch);
         }
 
     }
