@@ -7,11 +7,10 @@ namespace Game_DX
 {
     public class Tag
     {
-        public Type TagType { get; set; }
-
-        public Tag(Type tagType)
+        public Type Tag
         {
-            TagType = tagType;
+            set { Tag = value; }
+            get { return Tag; }
         }
     }
 
