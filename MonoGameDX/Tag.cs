@@ -7,8 +7,12 @@ namespace Game_DX
 {
     public class Tag
     {
-        public static int Trees = 1;
-        public static int grass = 2;
+        private enum Type
+        {
+            Trees,
+            Grass
+        }
+
         public int TagType { get; set; }
 
         public Tag(int tagType)
