@@ -10,7 +10,7 @@ namespace Game_DX
 {
     public class Tile
     {
-        public AbstractSprite sprite { get; set; }
+        public Sprite sprite { get; set; }
         public Vector2 Location { get; set; }
         public Vector2 Center 
         {
@@ -18,8 +18,8 @@ namespace Game_DX
         }
         public float Height { get; set; }
         public float Width { get; set; }
-        public object CollisionObject { get; set; }
-        public object  Tag { get; set; }
+        public BoundingBox CollisionObject { get; set; }
+        public Tag Type { get; set; }
         public bool isSolid { get; set; }
         public bool isMoveable { get; set; }
 
@@ -32,14 +32,14 @@ namespace Game_DX
 
         }
 
-        public void update()
+        public void Update()
         {
 
         }
 
-        public void draw(SpriteBatch spritebatch)
+        public void Draw(SpriteBatch spritebatch)
         {
-            sprite.draw(spritebatch);
+            sprite.Draw(spritebatch, Location);
         }
 
     }

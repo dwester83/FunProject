@@ -42,9 +42,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Sprite\AbstractSprite.cs" />
-    <Compile Include="Sprite\AnimatedSprite.cs" />
+    <Compile Include="BoundingBox.cs" />
     <Compile Include="Sprite\Sprite.cs" />
+    <Compile Include="Tag.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
