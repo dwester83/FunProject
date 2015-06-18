@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractGameShape.cs" />
-    <Compile Include="Hexagon.cs" />
+    <Compile Include="GameShapeDimond.cs" />
+    <Compile Include="GameShapeRectangle.cs" />
+    <Compile Include="GameShapeHexagon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

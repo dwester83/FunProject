@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace GameShapes
 {
-    public class Hexagon : AbstractGameShape
+    public class GameShapeHexagon : AbstractGameShape
     {
 
         protected int count = 0;
         
-        public Hexagon(int sideLength)
+        public GameShapeHexagon(int sideLength)
         {
+            NumberOfSides = 6;
             SideLength = sideLength;
             Vertices = new VertexPositionColor[18];
         }
@@ -50,7 +51,7 @@ namespace GameShapes
 
             for (int i = 0; i < tempVectors.Length; i++)
             {
-                angle = 2 * Math.PI / 6.0 * (i + 0.05) - 10;
+                angle = 2 * Math.PI / NumberOfSides * (i + 0.05) - 10.0; // the - is used for rotation
                 temp.Position.X = (float)(center.X + sideLength * Math.Cos(angle));
                 temp.Position.Y = (float)(center.Y + sideLength * Math.Sin(angle));
                 temp.Position.Z = 0f;
@@ -77,7 +78,7 @@ namespace GameShapes
             Borders[11] = Vectors[0];
             Borders[0] = Vectors[0];
 
-            setBorderColor(Color.Black);
+            setBorderColor(BorderColor);
         }
         public override void setBorderColor(Color color)
         {

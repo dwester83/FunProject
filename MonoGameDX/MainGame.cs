@@ -12,7 +12,7 @@ namespace Game_DX
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        AbstractGameShape shape = new Hexagon(20);
+        AbstractGameShape shape = new GameShapeRectangle(100, 20);
         public MainGame()
             : base()
         {
@@ -31,7 +31,8 @@ namespace Game_DX
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            shape.init(100, 100, GraphicsDevice, Color.Red, Color.Purple, Color.Black);
+            //shape.Initialize(100, 100, GraphicsDevice, Color.Red, Color.Purple, Color.Black);
+            shape.Initialize(200, 200, GraphicsDevice);
         }
 
         /// <summary>

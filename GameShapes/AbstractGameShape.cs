@@ -21,17 +21,45 @@ namespace GameShapes
         // This is an array of Vertices that hold the border positions 
         protected VertexPositionColor[] Borders { get; set; }
 
+        protected int NumberOfSides { get; set; }
+
         protected int hoverPosition = 0;
         
         protected Color InsideColor { get; set; }
-
         protected Color OutsideColor { get; set; }
         protected Color BorderColor { get; set; }
-        public void init(float x, float y, GraphicsDevice graphicsDevice, Color insideColor, Color outsideColor, Color borderColor)
+        protected Color HoverInsideColor { get; set; }
+        protected Color HoverOutsideColor { get; set; }
+        protected Color HoverBorderColor { get; set; }
+
+        public void Initialize(float x, float y, GraphicsDevice graphicsDevice)
+        {
+            InsideColor = Color.Gray;
+            OutsideColor = Color.Gray;
+            BorderColor = Color.Black;
+            HoverInsideColor = Color.LightGray;
+            HoverOutsideColor = Color.LightGray;
+            HoverBorderColor = Color.Black;
+
+            BasicEffect = new BasicEffect(graphicsDevice);
+            BasicEffect.VertexColorEnabled = true;
+            BasicEffect.Projection = Matrix.CreateOrthographicOffCenter
+               (0, graphicsDevice.Viewport.Width,     // left, right
+                graphicsDevice.Viewport.Height, 0,    // bottom, top
+                0, 1); // near, far plane
+
+            changeSize(x, y, SideLength);
+            changeLocation(x, y);
+
+        }
+        public void Initialize(float x, float y, GraphicsDevice graphicsDevice, Color insideColor, Color outsideColor, Color borderColor)
         {
             InsideColor = insideColor;
             OutsideColor = outsideColor;
             BorderColor = borderColor;
+            HoverInsideColor = OutsideColor;
+            HoverOutsideColor = InsideColor;
+            HoverBorderColor = BorderColor;
 
             BasicEffect = new BasicEffect(graphicsDevice);
             BasicEffect.VertexColorEnabled = true;
@@ -89,8 +117,8 @@ namespace GameShapes
         {
 
             BasicEffect.CurrentTechnique.Passes[0].Apply();
-            spriteBatch.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, Vertices, 0, 6);
-            spriteBatch.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineList, Borders, 0, 6);
+            spriteBatch.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleList, Vertices, 0, NumberOfSides);
+            spriteBatch.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineList, Borders, 0, NumberOfSides);
 
         }
     }
