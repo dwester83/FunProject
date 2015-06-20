@@ -12,7 +12,9 @@ namespace Game_DX
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        AbstractGameShape shape = new GameShapeRectangle(100, 20);
+        Sprite ball;
+        Texture2D ballTexture;
+        int count = 0;
         public MainGame()
             : base()
         {
@@ -31,8 +33,7 @@ namespace Game_DX
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            //shape.Initialize(100, 100, GraphicsDevice, Color.Red, Color.Purple, Color.Black);
-            shape.Initialize(200, 200, GraphicsDevice);
+            ball = new Sprite(ballTexture, 1, 10);
         }
 
         /// <summary>
@@ -43,7 +44,7 @@ namespace Game_DX
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            ballTexture = Content.Load<Texture2D>("Basic_Ball");
             // TODO: use this.Content to load your game content here
         }
 
@@ -63,11 +64,16 @@ namespace Game_DX
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            count++;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
-
+            if (count % 2 == 0)
+            {
+                ball.Update();
+            }
+            
             base.Update(gameTime);
         }
 
@@ -80,7 +86,9 @@ namespace Game_DX
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            shape.draw(spriteBatch);
+            spriteBatch.Begin();
+            ball.Draw(spriteBatch, new Vector2(400,400));
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
