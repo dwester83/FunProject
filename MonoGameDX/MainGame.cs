@@ -87,7 +87,7 @@ namespace Game_DX
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            ball.Draw(spriteBatch, new Vector2(400,400));
+            ball.Draw(spriteBatch, new Vector2(400,400), 3);
             spriteBatch.End();
             base.Draw(gameTime);
         }

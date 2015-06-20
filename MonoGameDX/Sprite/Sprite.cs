@@ -45,5 +45,18 @@ namespace Game_DX
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
             
         }
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, int increaseSizeBy)
+        {
+            int width = Texture.Width / Columns;
+            int height = Texture.Height / Rows;
+            int row = (int)((float)currentFrame / (float)Columns);
+            int column = currentFrame % Columns;
+
+            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
+            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width*increaseSizeBy, height*increaseSizeBy);
+
+            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
+            
+        }
     }
 }
