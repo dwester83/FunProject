@@ -33,7 +33,7 @@ namespace Game_DX
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            ball = new Sprite(ballTexture, 1, 10);
+            ball = new Sprite(ballTexture, 1, 11);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Game_DX
                 Exit();
 
             // TODO: Add your update logic here
-            if (count % 2 == 0)
+            if (count % 3 == 0)
             {
                 ball.Update();
             }
@@ -87,7 +87,7 @@ namespace Game_DX
 
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
-            ball.Draw(spriteBatch, new Vector2(100, 100), 3);
+            ball.Draw(spriteBatch, new Vector2(100, 100),6);
             spriteBatch.End();
             base.Draw(gameTime);
         }
