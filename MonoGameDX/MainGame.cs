@@ -86,8 +86,8 @@ namespace Game_DX
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-            ball.Draw(spriteBatch, new Vector2(400,400), 3);
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+            ball.Draw(spriteBatch, new Vector2(100, 100), 3);
             spriteBatch.End();
             base.Draw(gameTime);
         }

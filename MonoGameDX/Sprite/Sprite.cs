@@ -57,6 +57,6 @@ namespace Game_DX
 
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
             
-        }
+        } 
     }
 }
