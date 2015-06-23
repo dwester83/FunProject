@@ -42,10 +42,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BoundingBox.cs" />
+    <Compile Include="Tiles\BoundingBox.cs" />
     <Compile Include="Sprite\Sprite.cs" />
-    <Compile Include="Tag.cs" />
-    <Compile Include="Tile.cs" />
+    <Compile Include="Tiles\Map.cs" />
+    <Compile Include="Tiles\Tag.cs" />
+    <Compile Include="Tiles\Tile.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

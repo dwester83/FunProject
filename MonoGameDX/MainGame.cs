@@ -15,6 +15,10 @@ namespace Game_DX
         Sprite ball;
         Texture2D ballTexture;
         int count = 0;
+        //test stuff
+        int x = 100;
+        int y = 100;
+        bool reverse = false;
         public MainGame()
             : base()
         {
@@ -33,7 +37,7 @@ namespace Game_DX
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            ball = new Sprite(ballTexture, 1, 11);
+            ball = new Sprite(ballTexture, 1, 12);
         }
 
         /// <summary>
@@ -72,8 +76,21 @@ namespace Game_DX
             if (count % 3 == 0)
             {
                 ball.Update();
+
+                
             }
-            
+
+            if (reverse)
+            {
+                x--;
+            }
+            else
+            {
+                x++;
+            }
+
+            if (x > 500) reverse = true;
+            if (x < 100) reverse = false;
             base.Update(gameTime);
         }
 
@@ -87,7 +104,7 @@ namespace Game_DX
 
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
-            ball.Draw(spriteBatch, new Vector2(100, 100),6);
+            ball.Draw(spriteBatch, new Vector2(x, y),6);
             spriteBatch.End();
             base.Draw(gameTime);
         }
