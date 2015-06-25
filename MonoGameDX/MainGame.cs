@@ -1,4 +1,5 @@
-﻿using GameShapes;
+﻿using Game_DX.Tiles;
+using GameShapes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,7 +14,11 @@ namespace Game_DX
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Sprite ball;
+        Texture2D grassTexture;
         Texture2D ballTexture;
+        Texture2D colors;
+        Texture2D bwTexture;
+        Map map;
         int count = 0;
         //test stuff
         int x = 100;
@@ -38,6 +43,8 @@ namespace Game_DX
 
             base.Initialize();
             ball = new Sprite(ballTexture, 1, 12);
+            map = new Map(30, 50, bwTexture);
+            map.Initialize();
         }
 
         /// <summary>
@@ -49,7 +56,11 @@ namespace Game_DX
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ballTexture = Content.Load<Texture2D>("Basic_Ball");
+            grassTexture = Content.Load<Texture2D>("grass_motion");
+            colors = Content.Load<Texture2D>("Colors");
+            bwTexture = Content.Load<Texture2D>("black_white");
             // TODO: use this.Content to load your game content here
+           
         }
 
         /// <summary>
@@ -71,13 +82,14 @@ namespace Game_DX
             count++;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            if (count % 2 == 0)
+            {
+                map.Update();
+            }
             // TODO: Add your update logic here
             if (count % 3 == 0)
             {
                 ball.Update();
-
-                
             }
 
             if (reverse)
@@ -104,7 +116,8 @@ namespace Game_DX
 
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
-            ball.Draw(spriteBatch, new Vector2(x, y),6);
+            map.Draw(spriteBatch);
+            ball.Draw(spriteBatch, new Vector2(x, y),2);
             spriteBatch.End();
             base.Draw(gameTime);
         }

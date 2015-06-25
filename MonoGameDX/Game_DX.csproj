@@ -61,6 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Basic_Ball.png" />
+    <Content Include="Content\black_white.png" />
+    <Content Include="Content\Colors.png" />
+    <Content Include="Content\grass_motion.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
