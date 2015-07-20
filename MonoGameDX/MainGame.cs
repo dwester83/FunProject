@@ -43,8 +43,9 @@ namespace Game_DX
 
             base.Initialize();
             ball = new Sprite(ballTexture, 1, 12);
-            map = new Map(30, 50, bwTexture);
+            map = new Map(30, 50, grassTexture);
             map.Initialize();
+            this.IsMouseVisible = true;
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace Game_DX
             count++;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            if (count % 2 == 0)
+            if (count % 1 == 0)
             {
                 map.Update();
             }
@@ -112,7 +113,7 @@ namespace Game_DX
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
