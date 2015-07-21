@@ -18,6 +18,7 @@ namespace Game_DX
         Texture2D ballTexture;
         Texture2D colors;
         Texture2D bwTexture;
+        Texture2D grassyDirtTexture;
         Map map;
         int count = 0;
         //test stuff
@@ -43,7 +44,7 @@ namespace Game_DX
 
             base.Initialize();
             ball = new Sprite(ballTexture, 1, 12);
-            map = new Map(30, 50, grassTexture);
+            map = new Map(30, 50, grassTexture, grassyDirtTexture);
             map.Initialize();
             this.IsMouseVisible = true;
         }
@@ -58,6 +59,7 @@ namespace Game_DX
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ballTexture = Content.Load<Texture2D>("Basic_Ball");
             grassTexture = Content.Load<Texture2D>("grass_motion");
+            grassyDirtTexture = Content.Load<Texture2D>("grassy_dirt");
             colors = Content.Load<Texture2D>("Colors");
             bwTexture = Content.Load<Texture2D>("black_white");
             // TODO: use this.Content to load your game content here

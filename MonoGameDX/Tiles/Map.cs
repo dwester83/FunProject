@@ -16,6 +16,7 @@ namespace Game_DX.Tiles
         public static int SIZE = 16;
         public static int SIZE_MULTIPLIER = 2;
         Texture2D grass;
+        Texture2D dirt;
         int count = 1;
         Random rand = new Random();
 
@@ -24,15 +25,16 @@ namespace Game_DX.Tiles
         {
             Height = height;
             Width = width;
-            tiles = new GrassTile[Width, Height];
+            tiles = new TileAbstract[Width, Height];
             CreateWind();
         }
-        public Map(int height, int width, Texture2D grass)
+        public Map(int height, int width, Texture2D grass, Texture2D dirt)
         {
             Height = height;
             Width = width;
             this.grass = grass;
-            tiles = new GrassTile[Width, Height];
+            this.dirt = dirt;
+            tiles = new TileAbstract[Width, Height];
             CreateWind();
         }
         public void Initialize()
@@ -41,7 +43,15 @@ namespace Game_DX.Tiles
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    tiles[x, y] = new GrassTile(new Sprite(grass, 1, 12), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
+                    if ((x > 5 && x < 20) && ( y > 2 && y < 10))
+                    {
+                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 12), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
+                    }
+                    else
+                    {
+                        tiles[x, y] = new DirtTile(new Sprite(dirt, 1, 1), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
+                    }
+                    
                 }
             }
             //parse out dataSheet into tiles

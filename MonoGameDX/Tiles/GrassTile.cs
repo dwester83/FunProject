@@ -19,7 +19,7 @@ namespace Game_DX
         //TODO:: need to enbed sprite in tiles somehow
         //instead of p[assing it in
         static Random rand = new Random();
-        public GrassTile(Sprite sprite, Vector2 location) : base()
+        public GrassTile(Sprite sprite, Vector2 location)
         {
             TileSprite = sprite;
             this.Location = location;
