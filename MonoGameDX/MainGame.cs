@@ -21,9 +21,6 @@ namespace Game_DX
         Texture2D grassyDirtTexture;
         Map map;
         int count = 0;
-        //test stuff
-        int x = 100;
-        int y = 100;
         bool reverse = false;
         public MainGame()
             : base()
@@ -43,7 +40,7 @@ namespace Game_DX
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            ball = new Sprite(ballTexture, 1, 12);
+            ball = new Sprite(ballTexture, 1, 12, new Vector2(100, 100), 4);
             map = new Map(30, 50, grassTexture, grassyDirtTexture);
             map.Initialize();
             this.IsMouseVisible = true;
@@ -63,7 +60,7 @@ namespace Game_DX
             colors = Content.Load<Texture2D>("Colors");
             bwTexture = Content.Load<Texture2D>("black_white");
             // TODO: use this.Content to load your game content here
-           
+
         }
 
         /// <summary>
@@ -85,6 +82,9 @@ namespace Game_DX
             count++;
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            ball.moveDirection(Keyboard.GetState().GetPressedKeys());
+
             if (count % 1 == 0)
             {
                 map.Update();
@@ -95,17 +95,6 @@ namespace Game_DX
                 ball.Update();
             }
 
-            if (reverse)
-            {
-                x--;
-            }
-            else
-            {
-                x++;
-            }
-
-            if (x > 500) reverse = true;
-            if (x < 100) reverse = false;
             base.Update(gameTime);
         }
 
@@ -120,7 +109,7 @@ namespace Game_DX
             // TODO: Add your drawing code here
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             map.Draw(spriteBatch);
-            ball.Draw(spriteBatch, new Vector2(x, y),2);
+            ball.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }

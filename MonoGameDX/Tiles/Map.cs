@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -92,18 +93,34 @@ namespace Game_DX.Tiles
             
             //used to update the windArray here
             //can't be in list form because wind can be removed durring foreachloop
-            foreach (var wind in windArray.ToArray())
+            //foreach (var wind in windArray.ToArray())
+            //{
+            //    if (wind.IsWindDone)
+            //    {
+            //        windArray.Remove(wind);
+            //    }
+            //    else
+            //    {
+            //        IsTileInWind(wind);
+            //        wind.Update();
+            //    }
+            //}
+
+            // This is kind of a iffy... It should technically speed things up since it's not searching through the array to remove an object. Expecially if it'd doing a ton of this functionallity
+            // but the constant creation of a bag and then resetting the windArray may add more...
+            // The use of more parallel threads is something you need to be careful with since you need to use thread safe stuff.
+            ConcurrentBag<Wind> bag = new ConcurrentBag<Wind>();
+            Parallel.ForEach(windArray, wind =>
             {
-                if (wind.IsWindDone)
+                if (!wind.IsWindDone)
                 {
-                    windArray.Remove(wind);
-                }
-                else
-                {
+                    bag.Add(wind);
                     IsTileInWind(wind);
                     wind.Update();
                 }
-            }
+            });
+            windArray = bag.ToList<Wind>();
+
         }
         private void IsTileInWind(Wind wind)
         {
@@ -154,10 +171,16 @@ namespace Game_DX.Tiles
                 }
             }
 
-            foreach (var wind in windArray)
+            //foreach (var wind in windArray)
+            //{
+            //    wind.Draw(spriteBatch);
+            //}
+
+            // Will use more CPU power, but will draw faster and will get the same effect...
+            Parallel.ForEach(windArray, wind =>
             {
                 wind.Draw(spriteBatch);
-            }
+            });
 
         }
     }
