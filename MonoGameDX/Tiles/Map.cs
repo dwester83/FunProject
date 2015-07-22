@@ -43,7 +43,7 @@ namespace Game_DX.Tiles
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    if ((x > 5 && x < 20) && ( y > 2 && y < 10))
+                    if ((x > 2 && x < 22) && ( y > 1 && y < 14))
                     {
                         tiles[x, y] = new GrassTile(new Sprite(grass, 1, 12), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
                     }
