@@ -109,7 +109,7 @@ namespace Game_DX.Tiles
             // This is kind of a iffy... It should technically speed things up since it's not searching through the array to remove an object. Expecially if it'd doing a ton of this functionallity
             // but the constant creation of a bag and then resetting the windArray may add more...
             // The use of more parallel threads is something you need to be careful with since you need to use thread safe stuff.
-            ConcurrentBag<Wind> bag = new ConcurrentBag<Wind>();
+            var bag = new ConcurrentBag<Wind>();
             Parallel.ForEach(windArray, wind =>
             {
                 if (!wind.IsWindDone)
@@ -119,7 +119,7 @@ namespace Game_DX.Tiles
                     wind.Update();
                 }
             });
-            windArray = bag.ToList<Wind>();
+            windArray = bag.ToList<Wind>(); // Will lose its order!!! Shouldn't matter since visually don't see the changes until all draws are done!
 
         }
         private void IsTileInWind(Wind wind)

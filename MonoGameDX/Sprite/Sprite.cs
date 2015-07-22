@@ -65,7 +65,9 @@ namespace Game_DX
         {
             if (!nextPosition.Equals(currentPosition))
             {
-                // An update occured... Inital attempt, need to rebuild logic to make sure it's a valid move.
+                // An update occured... Inital attempt, need to pass a way to refer to valid moves/collisions
+                if (nextPosition.X < 0 || nextPosition.X > 500 || nextPosition.Y < 0 || nextPosition.Y > 400)
+                    nextPosition = currentPosition;
                 currentPosition = nextPosition;
             }
 
