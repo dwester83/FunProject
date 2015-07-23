@@ -19,7 +19,7 @@ namespace Game_DX.Tiles
         public bool IsDebugging { get; set; }
         private int count = 0;
         static Random rand = new Random();
-        public Wind(Vector2 point1, Vector2 point2, float speed, float direction, bool isDebugging = true )
+        public Wind(Vector2 point1, Vector2 point2, float speed, float direction, bool isDebugging = true)
         {
             float verticesSize;
             if (point1.Y >= point2.Y) { verticesSize = (point1.Y - point2.Y) / Map.SIZE * Map.SIZE_MULTIPLIER; }
@@ -40,7 +40,7 @@ namespace Game_DX.Tiles
             vertices[0] = new VertexPositionColor(new Vector3(point1.X + run, point1.Y + rise, 0), Color.Blue);
             for (int i = 1; i < vertices.Length; i++)
             {
-                VertexPositionColor tempVertex = vertices[i-1];
+                VertexPositionColor tempVertex = vertices[i - 1];
                 vertices[i] = new VertexPositionColor(new Vector3(tempVertex.Position.X + run, tempVertex.Position.Y + rise
                                                         , tempVertex.Position.Z), tempVertex.Color);
             }
@@ -59,25 +59,25 @@ namespace Game_DX.Tiles
             if (DistanceLeftToTravel < 0)
             {
                 IsWindDone = true;
-                
+
             }
             else
             {
-                
-                if (count % 3 == 0) 
+
+                if (count % 3 == 0)
                 {
 
                     double nx = Speed * Math.Cos(Direction + rand.Next(1));
                     double ny;
-                    if (count % 2 == 0) 
+                    if (count % 2 == 0)
                     {
-                       ny = Speed * Math.Sin(Direction + rand.Next(2));
+                        ny = Speed * Math.Sin(Direction + rand.Next(2));
                     }
                     else
                     {
                         ny = Speed * Math.Sin(Direction - rand.Next(2));
                     }
-                    
+
 
                     for (int i = 0; i < vertices.Length; i++)
                     {
@@ -101,18 +101,23 @@ namespace Game_DX.Tiles
                 basicEffect.Projection = Matrix.CreateOrthographicOffCenter
                    (0, graphicsDevice.Viewport.Width,     // left, right
                     graphicsDevice.Viewport.Height, 0,    // bottom, top
-                    0, 1);   
+                    0, 1);
             }
 
             if (IsDebugging)
             {
-                
+
                 basicEffect.CurrentTechnique.Passes[0].Apply();
                 spriteBatch.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineStrip, vertices, 0, 20);
             }
-           
-            
+
+
         }
 
+        #region Disposable
+
+        // Should inherite disposable because BasicEffect needs to be disposed.
+
+        #endregion
     }
 }

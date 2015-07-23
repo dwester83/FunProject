@@ -90,7 +90,7 @@ namespace Game_DX.Tiles
 
         private void UpdateWind()
         {
-            
+
             //used to update the windArray here
             //can't be in list form because wind can be removed durring foreachloop
             //foreach (var wind in windArray.ToArray())
@@ -109,17 +109,30 @@ namespace Game_DX.Tiles
             // This is kind of a iffy... It should technically speed things up since it's not searching through the array to remove an object. Expecially if it'd doing a ton of this functionallity
             // but the constant creation of a bag and then resetting the windArray may add more...
             // The use of more parallel threads is something you need to be careful with since you need to use thread safe stuff.
-            var bag = new ConcurrentBag<Wind>();
-            Parallel.ForEach(windArray, wind =>
+            //var bag = new ConcurrentBag<Wind>();
+            //Parallel.ForEach(windArray, wind =>
+            //{
+            //    if (!wind.IsWindDone)
+            //    {
+            //        bag.Add(wind);
+            //        IsTileInWind(wind);
+            //        wind.Update();
+            //    }
+            //});
+            //windArray = bag.ToList<Wind>(); // Will lose its order!!! Shouldn't matter since visually don't see the changes until all draws are done!
+
+            // Did some performace tests, this is the route to go, ConcurrentBags are RAM expensive with very little cpu saved. This is less CPU intesive that the first one, but a hair more RAM.
+            var list = new List<Wind>();
+            foreach (var wind in windArray)
             {
                 if (!wind.IsWindDone)
                 {
-                    bag.Add(wind);
+                    list.Add(wind);
                     IsTileInWind(wind);
                     wind.Update();
                 }
-            });
-            windArray = bag.ToList<Wind>(); // Will lose its order!!! Shouldn't matter since visually don't see the changes until all draws are done!
+            }
+            windArray = list;
 
         }
         private void IsTileInWind(Wind wind)

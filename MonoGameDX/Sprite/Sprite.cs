@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_DX
 {
@@ -20,6 +15,7 @@ namespace Game_DX
 
         private Vector2 nextPosition;
         private Vector2 currentPosition;
+        private bool isMovable = false;
 
         /// <summary>
         /// Property for the sprite size being drawn. Public avalible to be changed as needed.
@@ -109,24 +105,36 @@ namespace Game_DX
 
         public void Update()
         {
-            if (!nextPosition.Equals(currentPosition))
+            if (isMovable)
             {
-                // An update occured... Inital attempt, need to pass a way to refer to valid moves/collisions
-                if (nextPosition.X < 0 || nextPosition.X > 500 || nextPosition.Y < 0 || nextPosition.Y > 400)
-                    nextPosition = currentPosition;
-                currentPosition = nextPosition;
+                if (!nextPosition.Equals(currentPosition))
+                {
+                    // An update occured... Inital attempt, need to pass a way to refer to valid moves/collisions
+                    if (nextPosition.X < 0 || nextPosition.X > 500 || nextPosition.Y < 0 || nextPosition.Y > 400)
+                        nextPosition = currentPosition;
+                    currentPosition = nextPosition;
 
+                    updateFrame++;
+                    if (updateFrame % moveSpeed == 0)
+                        currentFrame++;
+
+                    if (currentFrame == totalFrames)
+                        currentFrame = 0;
+                }
+                else
+                {
+                    updateFrame = 0;
+                    currentFrame = 0;
+                }
+            }
+            else
+            {
                 updateFrame++;
                 if (updateFrame % moveSpeed == 0)
                     currentFrame++;
 
                 if (currentFrame == totalFrames)
                     currentFrame = 0;
-            }
-            else
-            {
-                updateFrame = 0;
-                currentFrame = 0;
             }
         }
 
@@ -175,6 +183,7 @@ namespace Game_DX
         {
             if (keys.Length > 0)
             {
+                isMovable = true;
                 nextPosition = currentPosition;
                 foreach (var direction in keys)
                 {
