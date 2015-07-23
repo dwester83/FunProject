@@ -1,0 +1,15 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Server" xmlns:Messaging="clr-namespace:Server.Messaging" x:Class="Server.MainWindow"
+        Title="MainWindow" Height="422" Width="775">
+    <TabControl Margin="5">
+        <TabItem Header="General Status">
+            <local:GeneralControl Margin="2"/>
+        </TabItem>
+        <TabItem Header="SQL View?"/>
+        <TabItem Header="Message Service">
+            <Messaging:MessageControl Margin="2"/>
+        </TabItem>
+    </TabControl>
+</Window>
