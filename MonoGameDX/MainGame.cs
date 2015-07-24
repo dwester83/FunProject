@@ -3,6 +3,8 @@ using GameShapes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Configuration;
 
 namespace Game_DX
 {
@@ -20,13 +22,24 @@ namespace Game_DX
         Texture2D bwTexture;
         Texture2D grassyDirtTexture;
         Map map;
-        int count = 0;
-        bool reverse = false;
+        int ticks = 0;
+
+        // Frame counts for keeping an eye on performace
+        private int frameRate = 0;
+        private int frameCounter = 0;
+        private TimeSpan elapsedTime = TimeSpan.Zero;
+
+        // Config stuff
+        private bool fps = false;
+
         public MainGame()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            // Should make a general configuration manager, for now just use the default...
+            fps = Convert.ToBoolean(ConfigurationManager.AppSettings["fps"]);
         }
 
         /// <summary>
@@ -40,7 +53,7 @@ namespace Game_DX
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            ball = new Sprite(ballTexture, 1, 12, new Vector2(100, 100), 4);
+            ball = new Sprite(ballTexture, 1, 12, new Vector2(100, 100), 2, 2, 4);
             map = new Map(30, 50, grassTexture, grassyDirtTexture);
             map.Initialize();
             this.IsMouseVisible = true;
@@ -79,20 +92,32 @@ namespace Game_DX
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            count++;
+            if (fps)
+                ticks++;
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            // Move the object first, then update side things...
             ball.moveDirection(Keyboard.GetState().GetPressedKeys());
+            ball.Update();
 
-            if (count % 1 == 0)
+            // Map delay needs to be built into the map... Sorry Josh.
+            map.Update();
+
+            // Update to change this debug flag to a setting in our app.config... F it, I'll just do it now...
+            if (fps)
             {
-                map.Update();
-            }
-            // TODO: Add your update logic here
-            if (count % 3 == 0)
-            {
-                ball.Update();
+                // Update the title bar so we can see FPS easier.
+                elapsedTime += gameTime.ElapsedGameTime;
+                if (elapsedTime > TimeSpan.FromSeconds(1))
+                {
+                    elapsedTime -= TimeSpan.FromSeconds(1);
+                    frameRate = frameCounter;
+                    Window.Title = $"Game_Title!!   FPS:{frameRate}   Ticks:{ticks}";
+                    frameCounter = 0;
+                    ticks = 0;
+                }
             }
 
             base.Update(gameTime);
@@ -104,6 +129,9 @@ namespace Game_DX
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            if (fps)
+                frameCounter++;
+
             GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here

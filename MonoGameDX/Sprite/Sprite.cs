@@ -1,11 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_DX
 {
@@ -15,15 +10,37 @@ namespace Game_DX
         public int Rows { get; set; }
         public int Columns { get; set; }
         private int currentFrame;
+        private int updateFrame;
         private int totalFrames;
 
         private Vector2 nextPosition;
         private Vector2 currentPosition;
+        private bool isMovable = false;
+
+        /// <summary>
+        /// Property for the sprite size being drawn. Public avalible to be changed as needed.
+        /// </summary>
+        private int spriteSize = 1;
+        public int SpriteSize
+        {
+            get { return spriteSize; }
+            set
+            {
+                if (value < 1)
+                {
+                    spriteSize = 1;
+                }
+                else
+                {
+                    spriteSize = value;
+                }
+            }
+        }
 
         /// <summary>
         /// Property for Movement speed. Currenly can't be reverse, probably will change that...
         /// </summary>
-        private int moveSpeed;
+        private int moveSpeed = 1;
         public int MoveSpeed
         {
             get { return moveSpeed; }
@@ -40,6 +57,26 @@ namespace Game_DX
             }
         }
 
+        /// <summary>
+        /// How fast the frame will update, lower if faster... May rework to have higher go faster...
+        /// </summary>
+        private int updateFrameSpeed = 1;
+        public int UpdateFrameSpeed
+        {
+            get { return updateFrameSpeed; }
+            set
+            {
+                if (value < 1)
+                {
+                    updateFrameSpeed = 1;
+                }
+                else
+                {
+                    updateFrameSpeed = value;
+                }
+            }
+        }
+
         public Sprite(Texture2D texture, int rows, int columns)
         {
             Texture = texture;
@@ -50,30 +87,55 @@ namespace Game_DX
         }
 
         // Should probably just make this a new object for a character/object...
-        public Sprite(Texture2D texture, int rows, int columns, Vector2 currentLocation, int moveSpeed)
+        public Sprite(Texture2D texture, int rows, int columns, Vector2 currentLocation, int moveSpeed = 1, int spriteSize = 1, int updateFrameSpeed = 1)
         {
             Texture = texture;
             Rows = rows;
             Columns = columns;
             currentFrame = 0;
+            updateFrame = 0;
             totalFrames = Rows * Columns;
             nextPosition = currentPosition = currentLocation; // This needs to be fixed
+
+            // Optionals
             MoveSpeed = moveSpeed;
+            SpriteSize = spriteSize;
+            UpdateFrameSpeed = updateFrameSpeed;
         }
 
         public void Update()
         {
-            if (!nextPosition.Equals(currentPosition))
+            if (isMovable)
             {
-                // An update occured... Inital attempt, need to pass a way to refer to valid moves/collisions
-                if (nextPosition.X < 0 || nextPosition.X > 500 || nextPosition.Y < 0 || nextPosition.Y > 400)
-                    nextPosition = currentPosition;
-                currentPosition = nextPosition;
-            }
+                if (!nextPosition.Equals(currentPosition))
+                {
+                    // An update occured... Inital attempt, need to pass a way to refer to valid moves/collisions
+                    if (nextPosition.X < 0 || nextPosition.X > 500 || nextPosition.Y < 0 || nextPosition.Y > 400)
+                        nextPosition = currentPosition;
+                    currentPosition = nextPosition;
 
-            currentFrame++;
-            if (currentFrame == totalFrames)
-                currentFrame = 0;
+                    updateFrame++;
+                    if (updateFrame % moveSpeed == 0)
+                        currentFrame++;
+
+                    if (currentFrame == totalFrames)
+                        currentFrame = 0;
+                }
+                else
+                {
+                    updateFrame = 0;
+                    currentFrame = 0;
+                }
+            }
+            else
+            {
+                updateFrame++;
+                if (updateFrame % moveSpeed == 0)
+                    currentFrame++;
+
+                if (currentFrame == totalFrames)
+                    currentFrame = 0;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -84,7 +146,7 @@ namespace Game_DX
             int column = currentFrame % Columns;
 
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)currentPosition.X, (int)currentPosition.Y, width * 2, height * 2);
+            Rectangle destinationRectangle = new Rectangle((int)currentPosition.X, (int)currentPosition.Y, width * spriteSize, height * spriteSize);
 
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
         }
@@ -121,6 +183,7 @@ namespace Game_DX
         {
             if (keys.Length > 0)
             {
+                isMovable = true;
                 nextPosition = currentPosition;
                 foreach (var direction in keys)
                 {
