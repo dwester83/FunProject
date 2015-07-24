@@ -50,7 +50,7 @@ namespace Game_DX.Tiles
                     }
                     else
                     {
-                        tiles[x, y] = new DirtTile(new Sprite(dirt, 1, 1), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
+                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 12), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
                     }
                     
                 }

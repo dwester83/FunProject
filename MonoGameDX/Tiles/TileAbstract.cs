@@ -20,7 +20,7 @@ namespace Game_DX.Tiles
         public float Height { get; set; }
         public float Width { get; set; }
         public bool IsSolid { get; set; }
-        public bool isMoveable { get; set; }
+        public bool IsMoveable { get; set; }
         #endregion
 
         #region abstract methods
