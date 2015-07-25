@@ -1,39 +1,36 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Game_DX
+public class ConfigManager
 {
-    public class ConfigManager
+    #region Singleton
+
+    private static volatile ConfigManager configManager;
+    private static object lockObj = new object();
+
+    private ConfigManager() { }
+
+    public static ConfigManager Instance
     {
-        #region Singleton
-
-        private static volatile ConfigManager configManager;
-        private static object lockObj = new object();
-
-        private ConfigManager() { }
-
-        public static ConfigManager Instance
+        get
         {
-            get
+            if (configManager == null)
             {
-                if (configManager == null)
+                lock (lockObj)
                 {
-                    lock (lockObj)
-                    {
-                        configManager = new ConfigManager();
-                    }
+                    configManager = new ConfigManager();
                 }
-                return configManager;
             }
+            return configManager;
         }
-
-        #endregion
-
-        // Properties
-        public bool FPS { get { return true; } }
-
-        public bool Debug { get { return true; } }
-
-        public GameWindow GameWindow { set; get; }
-
     }
+
+    #endregion
+
+    // Properties
+    public bool FPS { get { return true; } }
+
+    public bool Debug { get { return true; } }
+
+    public GameWindow GameWindow { set; get; }
+
 }
