@@ -42,6 +42,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ConfigManager\ConfigManager.cs" />
     <Compile Include="Sprite\Sprite.cs" />
     <Compile Include="Tiles\DirtTile.cs" />
     <Compile Include="Tiles\Map.cs" />
