@@ -15,7 +15,7 @@ namespace Game_DX.Tiles
         public int Height { get; set; }
         public int Width { get; set; }
         public static int SIZE = 16;
-        public static int SIZE_MULTIPLIER = 2;
+        public static int SIZE_MULTIPLIER = 4;
         Texture2D grass;
         Texture2D dirt;
         int count = 1;
@@ -46,11 +46,11 @@ namespace Game_DX.Tiles
                 {
                     if ((x > 2 && x < 22) && ( y > 1 && y < 14))
                     {
-                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 12), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
+                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 8), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
                     }
                     else
                     {
-                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 12), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
+                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 8), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
                     }
                     
                 }

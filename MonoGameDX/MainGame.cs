@@ -68,7 +68,7 @@ namespace Game_DX
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ballTexture = Content.Load<Texture2D>("Basic_Ball");
-            grassTexture = Content.Load<Texture2D>("grass_motion");
+            grassTexture = Content.Load<Texture2D>("grass_motion_simple_background");
             grassyDirtTexture = Content.Load<Texture2D>("grassy_dirt");
             colors = Content.Load<Texture2D>("Colors");
             bwTexture = Content.Load<Texture2D>("black_white");

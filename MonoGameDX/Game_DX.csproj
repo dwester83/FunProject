@@ -69,6 +69,7 @@
     <Content Include="Content\Colors.png" />
     <Content Include="Content\grassy_dirt.png" />
     <Content Include="Content\grass_motion.png" />
+    <Content Include="Content\grass_motion_simple_background.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
