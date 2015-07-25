@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Game_DX.Tiles
 {
@@ -16,10 +13,10 @@ namespace Game_DX.Tiles
         public float Direction { get; set; }
         public int DistanceLeftToTravel { get; set; }
         public bool IsWindDone { get; set; }
-        public bool IsDebugging { get; set; }
+        private bool isDebugging = false;
         private int count = 0;
         static Random rand = new Random();
-        public Wind(Vector2 point1, Vector2 point2, float speed, float direction, bool isDebugging = true)
+        public Wind(Vector2 point1, Vector2 point2, float speed, float direction)
         {
             float verticesSize;
             if (point1.Y >= point2.Y) { verticesSize = (point1.Y - point2.Y) / Map.SIZE * Map.SIZE_MULTIPLIER; }
@@ -30,7 +27,7 @@ namespace Game_DX.Tiles
             Direction = direction;
             IsWindDone = false;
             DistanceLeftToTravel = 500;
-            IsDebugging = isDebugging;
+            isDebugging = Convert.ToBoolean(ConfigurationManager.AppSettings["fps"]); ;
         }
         private void CreateWindPoints(Vector2 point1, Vector2 point2)
         {
@@ -104,7 +101,7 @@ namespace Game_DX.Tiles
                     0, 1);
             }
 
-            if (IsDebugging)
+            if (isDebugging)
             {
 
                 basicEffect.CurrentTechnique.Passes[0].Apply();
