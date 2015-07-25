@@ -1,10 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Configuration;
 
 namespace Game_DX
 {
-    public class ConfigManager : Game
+    public class ConfigManager
     {
         #region Singleton
 
