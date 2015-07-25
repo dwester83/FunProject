@@ -175,7 +175,7 @@ namespace Game_DX
 
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
             Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width * increaseSizeBy, height * increaseSizeBy);
-
+            
             spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
         }
 

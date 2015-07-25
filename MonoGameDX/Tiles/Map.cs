@@ -14,6 +14,7 @@ namespace Game_DX.Tiles
         TileAbstract[,] tiles;
         public int Height { get; set; }
         public int Width { get; set; }
+        public int WindowSize { get; set; }
         public static int SIZE = 16;
         public static int SIZE_MULTIPLIER = 4;
         Texture2D grass;
@@ -29,7 +30,7 @@ namespace Game_DX.Tiles
             tiles = new TileAbstract[Width, Height];
             CreateWind();
         }
-        public Map(int height, int width, Texture2D grass, Texture2D dirt)
+        public Map(int height, int width, Texture2D grass, Texture2D dirt, int windowSize)
         {
             Height = height;
             Width = width;
@@ -46,11 +47,11 @@ namespace Game_DX.Tiles
                 {
                     if ((x > 2 && x < 22) && ( y > 1 && y < 14))
                     {
-                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 8), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
+                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 8), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER), WindowSize);
                     }
                     else
                     {
-                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 8), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
+                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 8), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER), WindowSize);
                     }
                     
                 }

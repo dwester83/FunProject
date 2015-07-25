@@ -11,15 +11,16 @@ namespace Game_DX
 {
     public class GrassTile: TileAbstract
     {
-
+        Shadow shadow;
         private bool IsAnimating { get; set; }
         private int TotalFrames { get; set; }
         private int CurrentFrame { get; set; }
+        private int WindowSize { get; set; }
         private int count = 0;
         //TODO:: need to enbed sprite in tiles somehow
         //instead of p[assing it in
         static Random rand = new Random();
-        public GrassTile(Sprite sprite, Vector2 location)
+        public GrassTile(Sprite sprite, Vector2 location, int windowsize)
         {
             TileSprite = sprite;
             this.Location = location;
@@ -28,6 +29,8 @@ namespace Game_DX
             IsAnimating = false;
             Width = Map.SIZE * Map.SIZE_MULTIPLIER;
             Height = Map.SIZE * Map.SIZE_MULTIPLIER;
+            WindowSize = windowsize;
+            shadow = new Shadow(10, Location, sprite.Texture.Width, sprite.Texture.Height, windowsize);
         }
 
         public override void Initialize()
@@ -36,6 +39,7 @@ namespace Game_DX
 
         public override void Update()
         {
+            shadow.Update();
             if (IsAnimating)
             {
                 if(count % (rand.Next(1) + 4) == 0)
@@ -58,7 +62,8 @@ namespace Game_DX
 
         public override void Draw(SpriteBatch spritebatch)
         {
-            TileSprite.Draw(spritebatch, Location, Map.SIZE_MULTIPLIER);
+            shadow.Draw(spritebatch);
+            //TileSprite.Draw(spritebatch, Location, Map.SIZE_MULTIPLIER);
         }
 
         public override bool IsHitByWind(Vector3[] points)

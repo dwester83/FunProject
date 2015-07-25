@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game_DX.Tiles
 {
-    class Wind
+    class Wind : IDisposable
     {
         private VertexPositionColor[] vertices;
         private BasicEffect basicEffect;
@@ -106,7 +106,6 @@ namespace Game_DX.Tiles
 
             if (IsDebugging)
             {
-
                 basicEffect.CurrentTechnique.Passes[0].Apply();
                 spriteBatch.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineStrip, vertices, 0, 20);
             }
@@ -114,9 +113,13 @@ namespace Game_DX.Tiles
 
         }
 
+
         #region Disposable
 
-        // Should inherite disposable because BasicEffect needs to be disposed.
+        public void Dispose()
+        {
+            basicEffect.Dispose();
+        }
 
         #endregion
     }

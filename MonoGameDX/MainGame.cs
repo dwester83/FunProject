@@ -22,8 +22,9 @@ namespace Game_DX
         Texture2D bwTexture;
         Texture2D grassyDirtTexture;
         Map map;
+        
         int ticks = 0;
-
+        
         // Frame counts for keeping an eye on performace
         private int frameRate = 0;
         private int frameCounter = 0;
@@ -54,7 +55,7 @@ namespace Game_DX
 
             base.Initialize();
             ball = new Sprite(ballTexture, 1, 12, new Vector2(100, 100), 2, 2, 4);
-            map = new Map(30, 50, grassTexture, grassyDirtTexture);
+            map = new Map(30, 50, grassTexture, grassyDirtTexture, graphics.GraphicsDevice.Viewport.Width);
             map.Initialize();
             this.IsMouseVisible = true;
         }
