@@ -29,17 +29,11 @@ namespace Game_DX
         private int frameCounter = 0;
         private TimeSpan elapsedTime = TimeSpan.Zero;
 
-        // Config stuff
-        private bool fps = false;
-
         public MainGame()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
-            // Should make a general configuration manager, for now just use the default...
-            fps = Convert.ToBoolean(ConfigurationManager.AppSettings["fps"]);
         }
 
         /// <summary>
@@ -51,12 +45,13 @@ namespace Game_DX
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
+            ConfigManager.Instance.GameWindow = Window;
+
             ball = new Sprite(ballTexture, 1, 12, new Vector2(100, 100), 2, 2, 4);
             map = new Map(30, 50, grassTexture, grassyDirtTexture);
             map.Initialize();
-            this.IsMouseVisible = true;
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -92,7 +87,7 @@ namespace Game_DX
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (fps)
+            if (ConfigManager.Instance.FPS)
                 ticks++;
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -106,7 +101,7 @@ namespace Game_DX
             map.Update();
 
             // Update to change this debug flag to a setting in our app.config... F it, I'll just do it now...
-            if (fps)
+            if (ConfigManager.Instance.FPS)
             {
                 // Update the title bar so we can see FPS easier.
                 elapsedTime += gameTime.ElapsedGameTime;
@@ -114,7 +109,7 @@ namespace Game_DX
                 {
                     elapsedTime -= TimeSpan.FromSeconds(1);
                     frameRate = frameCounter;
-                    Window.Title = $"Game_Title!!   FPS:{frameRate}   Ticks:{ticks}";
+                    ConfigManager.Instance.GameWindow.Title = $"Game_Title!!   FPS:{frameRate}   Ticks:{ticks}";
                     frameCounter = 0;
                     ticks = 0;
                 }
@@ -129,7 +124,7 @@ namespace Game_DX
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            if (fps)
+            if (ConfigManager.Instance.FPS)
                 frameCounter++;
 
             GraphicsDevice.Clear(Color.White);
