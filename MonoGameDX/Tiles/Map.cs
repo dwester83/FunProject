@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Game_DX.Tiles
@@ -14,7 +11,6 @@ namespace Game_DX.Tiles
         TileAbstract[,] tiles;
         public int Height { get; set; }
         public int Width { get; set; }
-        public int WindowSize { get; set; }
         public static int SIZE = 16;
         public static int SIZE_MULTIPLIER = 4;
         Texture2D grass;
@@ -30,7 +26,7 @@ namespace Game_DX.Tiles
             tiles = new TileAbstract[Width, Height];
             CreateWind();
         }
-        public Map(int height, int width, Texture2D grass, Texture2D dirt, int windowSize)
+        public Map(int height, int width, Texture2D grass, Texture2D dirt)
         {
             Height = height;
             Width = width;
@@ -45,15 +41,15 @@ namespace Game_DX.Tiles
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    if ((x > 2 && x < 22) && ( y > 1 && y < 14))
+                    if ((x > 2 && x < 22) && (y > 1 && y < 14))
                     {
-                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 8), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER), WindowSize);
+                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 8), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
                     }
                     else
                     {
-                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 8), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER), WindowSize);
+                        tiles[x, y] = new GrassTile(new Sprite(grass, 1, 8), new Vector2(x * SIZE * SIZE_MULTIPLIER, y * SIZE * SIZE_MULTIPLIER));
                     }
-                    
+
                 }
             }
             //parse out dataSheet into tiles
@@ -91,38 +87,6 @@ namespace Game_DX.Tiles
 
         private void UpdateWind()
         {
-
-            //used to update the windArray here
-            //can't be in list form because wind can be removed durring foreachloop
-            //foreach (var wind in windArray.ToArray())
-            //{
-            //    if (wind.IsWindDone)
-            //    {
-            //        windArray.Remove(wind);
-            //    }
-            //    else
-            //    {
-            //        IsTileInWind(wind);
-            //        wind.Update();
-            //    }
-            //}
-
-            // This is kind of a iffy... It should technically speed things up since it's not searching through the array to remove an object. Expecially if it'd doing a ton of this functionallity
-            // but the constant creation of a bag and then resetting the windArray may add more...
-            // The use of more parallel threads is something you need to be careful with since you need to use thread safe stuff.
-            //var bag = new ConcurrentBag<Wind>();
-            //Parallel.ForEach(windArray, wind =>
-            //{
-            //    if (!wind.IsWindDone)
-            //    {
-            //        bag.Add(wind);
-            //        IsTileInWind(wind);
-            //        wind.Update();
-            //    }
-            //});
-            //windArray = bag.ToList<Wind>(); // Will lose its order!!! Shouldn't matter since visually don't see the changes until all draws are done!
-
-            // Did some performace tests, this is the route to go, ConcurrentBags are RAM expensive with very little cpu saved. This is less CPU intesive that the first one, but a hair more RAM.
             var list = new List<Wind>();
             foreach (var wind in windArray)
             {
@@ -134,8 +98,8 @@ namespace Game_DX.Tiles
                 }
             }
             windArray = list;
-
         }
+
         private void IsTileInWind(Wind wind)
         {
             Vector3[] windLocation = wind.GetWindLocation();

@@ -15,8 +15,9 @@ namespace Game_DX.Tiles
             get 
             { 
                 //need to get total width of screen and work out an algorithm
-                int position  = WindowSize / 60;
-                position = position % DateTime.Now.Second;
+                int position  = WindowWidth / 60;
+                var second = DateTime.Now.Second;
+                position = position % ((second > 0) ? second : 1);
                 return position;
             } 
         }
@@ -26,15 +27,15 @@ namespace Game_DX.Tiles
         public int Length { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
-        public int WindowSize { get; set; }
+        public int WindowWidth { get; set; }
         public VertexPositionColor[] vertices { get; private set; }
 
-        public Shadow(int length, Vector2 location, int width, int height, int windowsize)
+        public Shadow(int length, Vector2 location, int width, int height)
         {
             Height = height;
             Length = length;
             Width = width;
-            WindowSize = windowsize;
+            WindowWidth = ConfigManager.Instance.GraphicsWidth;
             Location = location;
             vertices = new VertexPositionColor[4];
             CreateShadowPoints();

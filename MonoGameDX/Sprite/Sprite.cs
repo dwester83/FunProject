@@ -186,6 +186,8 @@ namespace Game_DX
             {
                 // Running Key
                 bool running = containsKey(keys, Keys.LeftShift);
+                if (!running)
+                    running = containsKey(keys, Keys.RightShift);
 
                 // Other Keys can be checked here...
 
@@ -221,6 +223,12 @@ namespace Game_DX
             }
         }
 
+        /// <summary>
+        /// Will search the keys array for a specific key, this way it can be done once and is known.
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <param name="keyToFind"></param>
+        /// <returns></returns>
         private bool containsKey(Keys[] keys, Keys keyToFind)
         {
             return (from x in keys where x == keyToFind select x).Any();

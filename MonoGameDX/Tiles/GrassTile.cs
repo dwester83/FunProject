@@ -9,18 +9,17 @@ using System.Threading.Tasks;
 
 namespace Game_DX
 {
-    public class GrassTile: TileAbstract
+    public class GrassTile: TileAbstract, IDisposable
     {
         Shadow shadow;
         private bool IsAnimating { get; set; }
         private int TotalFrames { get; set; }
         private int CurrentFrame { get; set; }
-        private int WindowSize { get; set; }
         private int count = 0;
         //TODO:: need to enbed sprite in tiles somehow
         //instead of p[assing it in
         static Random rand = new Random();
-        public GrassTile(Sprite sprite, Vector2 location, int windowsize)
+        public GrassTile(Sprite sprite, Vector2 location)
         {
             TileSprite = sprite;
             this.Location = location;
@@ -29,8 +28,7 @@ namespace Game_DX
             IsAnimating = false;
             Width = Map.SIZE * Map.SIZE_MULTIPLIER;
             Height = Map.SIZE * Map.SIZE_MULTIPLIER;
-            WindowSize = windowsize;
-            shadow = new Shadow(10, Location, sprite.Texture.Width, sprite.Texture.Height, windowsize);
+            shadow = new Shadow(10, Location, sprite.Texture.Width, sprite.Texture.Height);
         }
 
         public override void Initialize()
@@ -79,5 +77,46 @@ namespace Game_DX
             }
             return false;
         }
+
+        #region IDisposable
+
+        // Dispose() calls Dispose(true)
+        public void Dispose()
+        {
+            Dispose(true);
+            //GC.SuppressFinalize(this); // Only call this if you set EVERYTHING in this object to disposed and null.
+        }
+
+        // NOTE: Leave out the finalizer altogether if this class doesn't 
+        // own unmanaged resources itself, but leave the other methods
+        // exactly as they are. 
+        //~GrassTile()
+        //{
+        //    // Finalizer calls Dispose(false)
+        //    Dispose(false);
+        //}
+
+        // The bulk of the clean-up code is implemented in Dispose(bool)
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // free managed resources
+                if (shadow != null)
+                {
+                    shadow.Dispose();
+                    shadow = null;
+                }
+            }
+
+            // free native resources if there are any.
+            //if (nativeResource != IntPtr.Zero)
+            //{
+            //    Marshal.FreeHGlobal(nativeResource);
+            //    nativeResource = IntPtr.Zero;
+            //}
+        }
+
+        #endregion
     }
 }

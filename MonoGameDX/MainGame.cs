@@ -52,7 +52,7 @@ namespace Game_DX
             base.Initialize();
 
             ball = new Sprite(ballTexture, 1, 12, new Vector2(100, 100), 2, 2, 4);
-            map = new Map(30, 50, grassTexture, grassyDirtTexture, graphics.GraphicsDevice.Viewport.Width);
+            map = new Map(30, 50, grassTexture, grassyDirtTexture);
             map.Initialize();
             IsMouseVisible = true;
         }
