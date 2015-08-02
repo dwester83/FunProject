@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-
-public class ConfigManager
+﻿public class ConfigManager
 {
     #region Singleton
 
@@ -27,10 +25,13 @@ public class ConfigManager
     #endregion
 
     // Properties
-    public bool FPS { get { return true; } }
+    public bool FPS { set; get; } = true;
 
-    public bool Debug { get { return true; } }
+    public bool Debug { set; get; } = true;
 
-    public GameWindow GameWindow { set; get; }
+    public int GraphicsWidth { set; get; } = 1280;
 
+    public int GraphicsHeight { set; get; } = 720;
+
+    public bool FullScreen { set; get; } = false;
 }

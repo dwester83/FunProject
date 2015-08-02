@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Linq;
 
 namespace Game_DX
 {
@@ -183,28 +184,46 @@ namespace Game_DX
         {
             if (keys.Length > 0)
             {
+                // Running Key
+                bool running = containsKey(keys, Keys.LeftShift);
+
+                // Other Keys can be checked here...
+
                 isMovable = true;
                 nextPosition = currentPosition;
                 foreach (var direction in keys)
                 {
                     if (direction == Keys.Up)
                     {
+                        if (running)
+                            nextPosition.Y -= MoveSpeed;
                         nextPosition.Y -= MoveSpeed;
                     }
                     else if (direction == Keys.Down)
                     {
+                        if (running)
+                            nextPosition.Y += MoveSpeed;
                         nextPosition.Y += MoveSpeed;
                     }
                     else if (direction == Keys.Right)
                     {
+                        if (running)
+                            nextPosition.X += MoveSpeed;
                         nextPosition.X += MoveSpeed;
                     }
                     else if (direction == Keys.Left)
                     {
+                        if (running)
+                            nextPosition.X -= MoveSpeed;
                         nextPosition.X -= MoveSpeed;
                     }
                 }
             }
+        }
+
+        private bool containsKey(Keys[] keys, Keys keyToFind)
+        {
+            return (from x in keys where x == keyToFind select x).Any();
         }
 
     }

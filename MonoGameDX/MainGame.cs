@@ -1,10 +1,8 @@
 ﻿using Game_DX.Tiles;
-using GameShapes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Configuration;
 
 namespace Game_DX
 {
@@ -22,18 +20,23 @@ namespace Game_DX
         Texture2D bwTexture;
         Texture2D grassyDirtTexture;
         Map map;
-        
+
         int ticks = 0;
-        
+
         // Frame counts for keeping an eye on performace
         private int frameRate = 0;
         private int frameCounter = 0;
         private TimeSpan elapsedTime = TimeSpan.Zero;
 
-        public MainGame()
-            : base()
+        public MainGame() : base()
         {
             graphics = new GraphicsDeviceManager(this);
+            // If we do a settings screen, this stuff can be moved to a method there and just called here.
+            graphics.PreferredBackBufferWidth = ConfigManager.Instance.GraphicsWidth;
+            graphics.PreferredBackBufferHeight = ConfigManager.Instance.GraphicsHeight;
+            graphics.IsFullScreen = ConfigManager.Instance.FullScreen;
+            graphics.ApplyChanges();
+
             Content.RootDirectory = "Content";
         }
 
@@ -47,7 +50,6 @@ namespace Game_DX
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            ConfigManager.Instance.GameWindow = Window;
 
             ball = new Sprite(ballTexture, 1, 12, new Vector2(100, 100), 2, 2, 4);
             map = new Map(30, 50, grassTexture, grassyDirtTexture, graphics.GraphicsDevice.Viewport.Width);
@@ -110,7 +112,7 @@ namespace Game_DX
                 {
                     elapsedTime -= TimeSpan.FromSeconds(1);
                     frameRate = frameCounter;
-                    ConfigManager.Instance.GameWindow.Title = $"Game_Title!!   FPS:{frameRate}   Ticks:{ticks}";
+                    Window.Title = $"Game_Title!!   FPS:{frameRate}   Ticks:{ticks}";
                     frameCounter = 0;
                     ticks = 0;
                 }

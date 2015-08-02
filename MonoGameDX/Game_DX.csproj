@@ -42,7 +42,6 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ConfigManager\ConfigManager.cs" />
     <Compile Include="Sprite\Sprite.cs" />
     <Compile Include="Tiles\DirtTile.cs" />
     <Compile Include="Tiles\Map.cs" />
@@ -81,6 +80,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConfigManager\ConfigManager.csproj">
+      <Project>{ff02dc2b-8305-471b-a184-abc873cdc71d}</Project>
+      <Name>ConfigManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GameShapes\GameShapes.csproj">
       <Project>{2b4cd885-5a86-4fe6-9ea9-1974eebc9223}</Project>
       <Name>GameShapes</Name>

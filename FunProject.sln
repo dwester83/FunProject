@@ -4,10 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game_DX", "MonoGameDX\Game_DX.csproj", "{FE945E9F-4BB2-4983-8DBC-0727967524C5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2B4CD885-5A86-4FE6-9EA9-1974EEBC9223} = {2B4CD885-5A86-4FE6-9EA9-1974EEBC9223}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{06483314-EF03-4EFF-B595-5528F5E13647}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShapes", "GameShapes\GameShapes.csproj", "{2B4CD885-5A86-4FE6-9EA9-1974EEBC9223}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigManager", "ConfigManager\ConfigManager.csproj", "{FF02DC2B-8305-471B-A184-ABC873CDC71D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +55,18 @@ Global
 		{2B4CD885-5A86-4FE6-9EA9-1974EEBC9223}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2B4CD885-5A86-4FE6-9EA9-1974EEBC9223}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2B4CD885-5A86-4FE6-9EA9-1974EEBC9223}.Release|x86.ActiveCfg = Release|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Debug|x86.Build.0 = Debug|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Release|x86.ActiveCfg = Release|Any CPU
+		{FF02DC2B-8305-471B-A184-ABC873CDC71D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
