@@ -9,8 +9,8 @@ namespace Game_DX.Input
 {
     class KeyboardChangeState
     {
-        private KeyboardState PreviousState { get; set; }
-        private KeyboardState CurrentState { get; set; }
+        public KeyboardState PreviousState { get; private set; }
+        public KeyboardState CurrentState { get; private set; }
 
         public void SetState(KeyboardState keyboardState)
         {

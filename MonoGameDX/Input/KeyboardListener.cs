@@ -28,9 +28,9 @@ namespace Game_DX.Input
 
             KeyboardCurrentState.SetState(currentState);
 
-            if (KeyboardCurrentState.HasChanged() && (int)elapsedTime >= TimeSpan.FromMilliseconds(1000).TotalMilliseconds)
+            if (KeyboardCurrentState.HasChanged() && (int)elapsedTime >= TimeSpan.FromMilliseconds(10).TotalMilliseconds)
             {
-                notifySubscribers();
+                notifySubscribers(gameTime);
             }
 
             if (elapsedTime > 1000) { elapsedTime = 0; }
@@ -46,11 +46,11 @@ namespace Game_DX.Input
         {
             Subscribers.Remove(subscriber);
         }
-        public void notifySubscribers()
+        public void notifySubscribers(GameTime gameTime)
         {
             foreach (var subscriber in Subscribers)
             {
-                subscriber.NotifyOfChange(KeyboardCurrentState);
+                subscriber.NotifyOfChange(KeyboardCurrentState, gameTime);
             }
         }
     

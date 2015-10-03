@@ -10,18 +10,18 @@ namespace Game_DX
         public Texture2D Texture { get; set; }
         public int Rows { get; set; }
         public int Columns { get; set; }
-        private int currentFrame;
-        private int updateFrame;
-        private int totalFrames;
+        public int currentFrame;
+        public int updateFrame;
+        public int totalFrames;
 
-        private Vector2 nextPosition;
-        private Vector2 currentPosition;
-        private bool isMovable = false;
+        public Vector2 nextPosition;
+        public Vector2 currentPosition;
+        public bool isMovable = false;
 
         /// <summary>
         /// Property for the sprite size being drawn. Public avalible to be changed as needed.
         /// </summary>
-        private int spriteSize = 1;
+        public int spriteSize = 1;
         public int SpriteSize
         {
             get { return spriteSize; }
