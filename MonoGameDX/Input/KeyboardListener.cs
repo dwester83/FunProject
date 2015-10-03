@@ -13,6 +13,10 @@ namespace Game_DX.Input
         private KeyboardChangeState KeyboardCurrentState { get; set; }
         private List<IInputSubscriber> Subscribers { get; set; }
         private double elapsedTime = 0;
+        private static readonly int MILLISECONDS_PER_SECOND = 1000;
+        private static readonly int UPDATES_PER_SECOND = 70;
+        private int timeSpanMilliseconds = MILLISECONDS_PER_SECOND / UPDATES_PER_SECOND;
+
 
         public KeyboardListener()
         {

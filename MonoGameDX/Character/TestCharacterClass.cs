@@ -62,11 +62,20 @@ namespace Game_DX.Character
 
             var velocity = Vector2.Zero;
 
-            foreach (var key in keyboardChangeState.CurrentState.GetPressedKeys())
+            foreach (var key in keyDictonary)
             {
-                velocity += keyDictonary[key];
+                if(keyboardChangeState.CurrentState.IsKeyDown(key.Key))
+                {
+                    velocity += key.Value;
+                }
+
             }
 
+            //normolizes the vector so you don't move dignal faster than other directions
+            if(velocity != Vector2.Zero)
+            {
+                velocity.Normalize();
+            }
             Velocity = velocity * characterSpeed;
 
             Position += (Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds);
