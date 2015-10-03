@@ -26,7 +26,7 @@ namespace Game_DX.Tiles
             Speed = speed;
             Direction = direction;
             IsWindDone = false;
-            DistanceLeftToTravel = 500;
+            DistanceLeftToTravel = 1000;
             isDebugging = Convert.ToBoolean(ConfigurationManager.AppSettings["fps"]); ;
         }
         private void CreateWindPoints(Vector2 point1, Vector2 point2)

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using Game_DX.Input;
 
 namespace Game_DX
 {
@@ -20,7 +21,7 @@ namespace Game_DX
         Texture2D bwTexture;
         Texture2D grassyDirtTexture;
         Map map;
-
+        KeyboardListener keyboardListener;
         int ticks = 0;
 
         // Frame counts for keeping an eye on performace
@@ -36,7 +37,7 @@ namespace Game_DX
             graphics.PreferredBackBufferHeight = ConfigManager.Instance.GraphicsHeight;
             graphics.IsFullScreen = ConfigManager.Instance.FullScreen;
             graphics.ApplyChanges();
-
+            keyboardListener = new KeyboardListener();
             Content.RootDirectory = "Content";
         }
 
@@ -55,6 +56,7 @@ namespace Game_DX
             map = new Map(30, 50, grassTexture, grassyDirtTexture);
             map.Initialize();
             IsMouseVisible = true;
+            
         }
 
         /// <summary>
@@ -90,11 +92,10 @@ namespace Game_DX
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            var state = Keyboard.GetState();
+            keyboardListener.Update(state, gameTime);
             if (ConfigManager.Instance.FPS)
                 ticks++;
-
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
             // Move the object first, then update side things...
             ball.moveDirection(Keyboard.GetState().GetPressedKeys());

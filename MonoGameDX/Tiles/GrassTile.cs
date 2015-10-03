@@ -11,7 +11,6 @@ namespace Game_DX
 {
     public class GrassTile: TileAbstract, IDisposable
     {
-        Shadow shadow;
         private bool IsAnimating { get; set; }
         private int TotalFrames { get; set; }
         private int CurrentFrame { get; set; }
@@ -28,7 +27,6 @@ namespace Game_DX
             IsAnimating = false;
             Width = Map.SIZE * Map.SIZE_MULTIPLIER;
             Height = Map.SIZE * Map.SIZE_MULTIPLIER;
-            shadow = new Shadow(10, Location, sprite.Texture.Width, sprite.Texture.Height);
         }
 
         public override void Initialize()
@@ -37,10 +35,9 @@ namespace Game_DX
 
         public override void Update()
         {
-            shadow.Update();
             if (IsAnimating)
             {
-                if(count % (rand.Next(1) + 4) == 0)
+                if(count % (rand.Next(1) + 8) == 0)
                 {
                     TileSprite.Update();
                     CurrentFrame++;
@@ -60,8 +57,7 @@ namespace Game_DX
 
         public override void Draw(SpriteBatch spritebatch)
         {
-            shadow.Draw(spritebatch);
-            //TileSprite.Draw(spritebatch, Location, Map.SIZE_MULTIPLIER);
+            TileSprite.Draw(spritebatch, Location, Map.SIZE_MULTIPLIER);
         }
 
         public override bool IsHitByWind(Vector3[] points)
@@ -102,11 +98,6 @@ namespace Game_DX
             if (disposing)
             {
                 // free managed resources
-                if (shadow != null)
-                {
-                    shadow.Dispose();
-                    shadow = null;
-                }
             }
 
             // free native resources if there are any.
