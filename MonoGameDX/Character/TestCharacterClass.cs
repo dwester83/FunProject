@@ -15,15 +15,16 @@ namespace Game_DX.Character
         public Vector2 Position { get; set; }
         public Sprite CharacterSprite { get; set; }
         public Vector2 Velocity { get; private set; }
-
+        public int CharacterSize { get; set; }
         public const float characterSpeed = 100f;
-
+        
 
         public TestCharacterClass(Sprite sprite, KeyboardListener listener)
         {
             listener.AddSubscriber(this);
             CharacterSprite = sprite;
             Velocity = Vector2.Zero;
+            CharacterSize = 2;
         }
 
         public void Update(GameTime gameTime)
@@ -33,16 +34,7 @@ namespace Game_DX.Character
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            var texture = CharacterSprite.Texture;
-            int width = texture.Width / CharacterSprite.Columns;
-            int height = texture.Height / CharacterSprite.Rows;
-            int row = (int)((float)CharacterSprite.currentFrame / (float)CharacterSprite.Columns);
-            int column = CharacterSprite.currentFrame % CharacterSprite.Columns;
-
-            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)Position.X, (int)Position.Y, width, height);
-
-            spriteBatch.Draw(texture, destinationRectangle, sourceRectangle, Color.White);
+            CharacterSprite.Draw(spriteBatch,Position,CharacterSize);
         }
 
         public void NotifyOfChange(KeyboardChangeState keyboardChangeState, GameTime gameTime)
@@ -57,7 +49,7 @@ namespace Game_DX.Character
                                                  {Keys.Left , new Vector2(-1, 0) },
                                                  {Keys.Right , new Vector2(1, 0) },
                                                  {Keys.Up , new Vector2(0, -1) },
-                                                 {Keys.Down , new Vector2(0, 1) },
+                                                 {Keys.Down , new Vector2(0, 1) }
                                             };
 
             var velocity = Vector2.Zero;
@@ -71,7 +63,7 @@ namespace Game_DX.Character
 
             }
 
-            //normolizes the vector so you don't move dignal faster than other directions
+            //normalizes the vector so you don't move diagnal faster than other directions
             if(velocity != Vector2.Zero)
             {
                 velocity.Normalize();
