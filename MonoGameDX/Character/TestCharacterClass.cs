@@ -49,7 +49,11 @@ namespace Game_DX.Character
                                                  {Keys.Left , new Vector2(-1, 0) },
                                                  {Keys.Right , new Vector2(1, 0) },
                                                  {Keys.Up , new Vector2(0, -1) },
-                                                 {Keys.Down , new Vector2(0, 1) }
+                                                 {Keys.Down , new Vector2(0, 1) },
+                                                 {Keys.A , new Vector2(-1, 0) },
+                                                 {Keys.D , new Vector2(1, 0) },
+                                                 {Keys.W , new Vector2(0, -1) },
+                                                 {Keys.S , new Vector2(0, 1) }
                                             };
 
             var velocity = Vector2.Zero;
@@ -58,7 +62,12 @@ namespace Game_DX.Character
             {
                 if(keyboardChangeState.CurrentState.IsKeyDown(key.Key))
                 {
+                    
                     velocity += key.Value;
+                    if(velocity.X > 1) { velocity.X = 1; }
+                    if (velocity.X < -1) { velocity.X = -1; }
+                    if (velocity.Y > 1) { velocity.Y = 1; }
+                    if (velocity.Y < -1) { velocity.Y = -1; }
                 }
 
             }
