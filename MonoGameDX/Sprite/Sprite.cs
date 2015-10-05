@@ -88,7 +88,7 @@ namespace Game_DX
         }
 
         // Should probably just make this a new object for a character/object...
-        public Sprite(Texture2D texture, int rows, int columns, Vector2 currentLocation, int moveSpeed = 1, int spriteSize = 1, int updateFrameSpeed = 1)
+        public Sprite(Texture2D texture, int rows, int columns, int updateFrameSpeed = 1)
         {
             Texture = texture;
             Rows = rows;
@@ -96,8 +96,7 @@ namespace Game_DX
             currentFrame = 0;
             updateFrame = 0;
             totalFrames = Rows * Columns;
-            nextPosition = currentPosition = currentLocation; // This needs to be fixed
-
+            
             // Optionals
             MoveSpeed = moveSpeed;
             SpriteSize = spriteSize;

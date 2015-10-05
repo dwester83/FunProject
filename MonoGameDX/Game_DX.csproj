@@ -42,6 +42,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Character\CharacterTextureFactory.cs" />
     <Compile Include="Character\TestCharacterClass.cs" />
     <Compile Include="Input\IInputSubscriber.cs" />
     <Compile Include="Input\KeyboardChangeState.cs" />
@@ -74,6 +75,8 @@
     <Content Include="Content\grassy_dirt.png" />
     <Content Include="Content\grass_motion.png" />
     <Content Include="Content\grass_motion_simple_background.png" />
+    <Content Include="Content\test_character_texture.png" />
+    <Content Include="Content\test_gloves.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

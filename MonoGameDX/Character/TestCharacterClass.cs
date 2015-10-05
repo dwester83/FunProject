@@ -17,14 +17,23 @@ namespace Game_DX.Character
         public Vector2 Velocity { get; private set; }
         public int CharacterSize { get; set; }
         public const float characterSpeed = 100f;
+        private CharacterTextureFactory TextureFactory = CharacterTextureFactory.GetInstance();
         
 
-        public TestCharacterClass(Sprite sprite, KeyboardListener listener)
+        public TestCharacterClass(Sprite sprite, KeyboardListener listener,GraphicsDevice device, Texture2D glovesTexture)
         {
+            
+            TextureFactory.PlayerTexture = sprite.Texture;
+            TextureFactory.GlovesTexture = glovesTexture;
             listener.AddSubscriber(this);
             CharacterSprite = sprite;
             Velocity = Vector2.Zero;
-            CharacterSize = 2;
+            CharacterSize = 4;
+            TextureFactory.PlayerHairColor = Color.Purple;
+            TextureFactory.GlovesPrimaryColor = Color.Red;
+            TextureFactory.GlovesSecondaryColor = Color.Black;
+            TextureFactory.Target = new RenderTarget2D(device, sprite.Texture.Width, sprite.Texture.Height);
+            
         }
 
         public void Update(GameTime gameTime)
@@ -34,6 +43,7 @@ namespace Game_DX.Character
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            CharacterSprite.Texture = TextureFactory.GetCharacterTexture();
             CharacterSprite.Draw(spriteBatch,Position,CharacterSize);
         }
 

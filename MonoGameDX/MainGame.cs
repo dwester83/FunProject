@@ -16,11 +16,14 @@ namespace Game_DX
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Sprite ball;
+        Sprite testCharacterSprite;
         Texture2D grassTexture;
         Texture2D ballTexture;
         Texture2D colors;
         Texture2D bwTexture;
         Texture2D grassyDirtTexture;
+        Texture2D testCharacterTexture;
+        Texture2D testGloves;
         TestCharacterClass testCharacter;
 
 
@@ -57,9 +60,10 @@ namespace Game_DX
             // TODO: Add your initialization logic here
             base.Initialize();
             
-            ball = new Sprite(ballTexture, 1, 12, new Vector2(100, 100), 2, 2, 4);
+            ball = new Sprite(ballTexture, 1, 12, 4);
             map = new Map(30, 50, grassTexture, grassyDirtTexture);
-            testCharacter = new TestCharacterClass(ball, keyboardListener);
+            testCharacterSprite = new Sprite(testCharacterTexture, 1, 1, 4);
+            testCharacter = new TestCharacterClass(testCharacterSprite, keyboardListener, GraphicsDevice, testGloves);
             map.Initialize();
             IsMouseVisible = true;
             
@@ -72,7 +76,10 @@ namespace Game_DX
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            testCharacterTexture = Content.Load<Texture2D>("test_character_texture");
+            testGloves = Content.Load<Texture2D>("test_gloves");
             ballTexture = Content.Load<Texture2D>("Basic_Ball");
             grassTexture = Content.Load<Texture2D>("grass_motion_simple_background");
             grassyDirtTexture = Content.Load<Texture2D>("grassy_dirt");
