@@ -12,11 +12,11 @@ namespace Game_DX.Character
         public Texture2D HelmetTexture { get; set; }
         public Texture2D GlovesTexture { get; set; }
         public Texture2D ChestTexture { get; set; }
-        public Texture2D BootsTexture { get; set; }
         public Texture2D PantsTexture { get; set; }
+        public Texture2D BootsTexture { get; set; }
         public Texture2D CloakTexture { get; set; }
-
-        
+                 
+        //NEED TO SWITCH THESE AROUND WITH STARTING COLORS
         public Color PlayerSkinColor { get; set; }
         public Color PlayerEyeColor { get; set; }
         public Color PlayerHairColor { get; set; }
@@ -32,23 +32,23 @@ namespace Game_DX.Character
         public Color PantsSecondaryColor { get; set; }
         public Color CloakPrimaryColor { get; set; }
         public Color CloakSecondaryColor { get; set; }
-        private Color StartingPlayerSkinColor { get; }
-        private Color StartingPlayerEyeColor { get; }
-        private Color StartingPlayerHairColor = new Color(255, 243, 146, 255);
-        private Color StartingHelmetPrimaryColor { get; }
-        private Color StartingHelmetSecondaryColor { get; }
-        private Color StartingGlovesPrimaryColor = new Color(162, 186, 255, 255);
-        private Color StartingGlovesSecondaryColor = new Color(81, 130, 255, 255);
-        private Color StartingChestPrimaryColor { get; }
-        private Color StartingChestSecondaryColor { get; }
-        private Color StartingBootsPrimaryColor { get; }
-        private Color StartingBootsSecondaryColor { get; }
-        private Color StartingPantsPrimaryColor { get; }
-        private Color StartingPantsSecondaryColor { get; }
-        private Color StartingCloakPrimaryColor { get; }
-        private Color StartingCloakSecondaryColor { get; }
+
+        private Color StartingPlayerSkinColor = new Color(255, 204, 128, 255);
+        private Color StartingPlayerEyeColor = new Color(128, 203, 196, 255);
+        private Color StartingPlayerHairColor = new Color(93, 64, 55, 255);
+        private Color StartingHelmetPrimaryColor = new Color(84, 110, 122, 255);
+        private Color StartingHelmetSecondaryColor = new Color(244, 81, 30, 255);
+        private Color StartingGlovesPrimaryColor = new Color(96, 125, 139, 255);
+        private Color StartingGlovesSecondaryColor = new Color(255, 87, 34, 255);
+        private Color StartingChestPrimaryColor = new Color(144, 164, 174, 255);
+        private Color StartingChestSecondaryColor = new Color(255, 138, 101, 255);
+        private Color StartingBootsPrimaryColor = new Color(69, 90, 100, 255);
+        private Color StartingBootsSecondaryColor = new Color(230, 74, 25, 255);
+        private Color StartingPantsPrimaryColor = new Color(120, 144, 156, 255);
+        private Color StartingPantsSecondaryColor = new Color(255, 112, 67, 255);
+        private Color StartingCloakPrimaryColor = new Color(55, 71, 79, 255);
+        private Color StartingCloakSecondaryColor = new Color(216, 67, 21, 255);
         private Color TransparentColor = new Color(0, 0, 0, 0);
-        public RenderTarget2D Target { get; internal set; }
 
         private CharacterTextureFactory() {}
         public static CharacterTextureFactory GetInstance()
@@ -69,36 +69,54 @@ namespace Game_DX.Character
 
         private void UpdateTexture()
         {
-            ReplaceColors(PlayerTexture);
-            ReplaceColors(GlovesTexture);
-        }
-
-        private void ReplaceColors(Texture2D texture)
-        {
             Color[] playersArray = new Color[PlayerTexture.Width * PlayerTexture.Height];
             PlayerTexture.GetData<Color>(playersArray);
-            Color[] tempArray = new Color[texture.Width * texture.Height];
-            texture.GetData<Color>(tempArray);
+            Color[] chestArray = new Color[ChestTexture.Width * ChestTexture.Height];
+            ChestTexture.GetData<Color>(chestArray);
+            Color[] pantsArray = new Color[PantsTexture.Width * PantsTexture.Height];
+            PantsTexture.GetData<Color>(pantsArray);
+            Color[] glovesArray = new Color[GlovesTexture.Width * GlovesTexture.Height];
+            GlovesTexture.GetData<Color>(glovesArray);
+            Color[] helmetArray = new Color[HelmetTexture.Width * HelmetTexture.Height];
+            HelmetTexture.GetData<Color>(helmetArray);
+            Color[] bootsArray = new Color[BootsTexture.Width * BootsTexture.Height];
+            BootsTexture.GetData<Color>(bootsArray);
+            Color[] cloakArray = new Color[CloakTexture.Width * CloakTexture.Height];
+            CloakTexture.GetData<Color>(cloakArray);
+
             for (int x = 0; x < playersArray.Length; x++)
             {
-
-                if (!tempArray[x].Equals(TransparentColor))
+                if (!chestArray[x].Equals(TransparentColor))
                 {
-                    playersArray[x] = tempArray[x];
+                    playersArray[x] = chestArray[x];
                 }
-                //Console.WriteLine(colors2D[x, y].ToString());
+                if (!pantsArray[x].Equals(TransparentColor))
+                {
+                    playersArray[x] = pantsArray[x];
+                }
+                if (!glovesArray[x].Equals(TransparentColor))
+                {
+                    playersArray[x] = glovesArray[x];
+                }
+                if (!bootsArray[x].Equals(TransparentColor))
+                {
+                    playersArray[x] = bootsArray[x];
+                }
+                if (!helmetArray[x].Equals(TransparentColor))
+                {
+                    playersArray[x] = helmetArray[x];
+                }
+                if (!cloakArray[x].Equals(TransparentColor))
+                {
+                    playersArray[x] = cloakArray[x];
+                }
+
                 if (playersArray[x].Equals(StartingPlayerHairColor))
                 {
                     playersArray[x] = PlayerHairColor;
                 }
-                else if (playersArray[x].Equals(StartingGlovesPrimaryColor))
-                {
-                    playersArray[x] = GlovesPrimaryColor;
-                }
-                else if (playersArray[x].Equals(StartingGlovesSecondaryColor))
-                {
-                    playersArray[x] = GlovesSecondaryColor;
-                }
+
+
 
             }
             PlayerTexture.SetData<Color>(playersArray);

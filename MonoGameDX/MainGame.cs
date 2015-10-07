@@ -23,7 +23,13 @@ namespace Game_DX
         Texture2D bwTexture;
         Texture2D grassyDirtTexture;
         Texture2D testCharacterTexture;
-        Texture2D testGloves;
+        Texture2D testGlovesTexture;
+        Texture2D testChestTexture;
+        Texture2D testPantsTexture;
+        Texture2D testBootsTexture;
+        Texture2D testHelmetTexture;
+        Texture2D testCloakTexture;
+        Texture2D testEmptyTexture;
         TestCharacterClass testCharacter;
 
 
@@ -63,7 +69,8 @@ namespace Game_DX
             ball = new Sprite(ballTexture, 1, 12, 4);
             map = new Map(30, 50, grassTexture, grassyDirtTexture);
             testCharacterSprite = new Sprite(testCharacterTexture, 1, 1, 4);
-            testCharacter = new TestCharacterClass(testCharacterSprite, keyboardListener, GraphicsDevice, testGloves);
+            testCharacter = new TestCharacterClass(testCharacterSprite, keyboardListener, testGlovesTexture, testChestTexture
+                                                , testPantsTexture, testHelmetTexture, testCloakTexture, testBootsTexture, testEmptyTexture);
             map.Initialize();
             IsMouseVisible = true;
             
@@ -78,8 +85,14 @@ namespace Game_DX
             // Create a new SpriteBatch, which can be used to draw textures.
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            testCharacterTexture = Content.Load<Texture2D>("test_character_texture");
-            testGloves = Content.Load<Texture2D>("test_gloves");
+            testCharacterTexture = Content.Load<Texture2D>(@"test_character\test_character_body");
+            testGlovesTexture = Content.Load<Texture2D>(@"test_character\test_character_gloves");
+            testBootsTexture = Content.Load<Texture2D>(@"test_character\test_character_boots");
+            testHelmetTexture = Content.Load<Texture2D>(@"test_character\test_character_helmet");
+            testChestTexture = Content.Load<Texture2D>(@"test_character\test_character_chest");
+            testPantsTexture = Content.Load<Texture2D>(@"test_character\test_character_pants");
+            testCloakTexture = Content.Load<Texture2D>(@"test_character\test_character_cloak");
+            testEmptyTexture = Content.Load<Texture2D>(@"test_character\test_character_empty");
             ballTexture = Content.Load<Texture2D>("Basic_Ball");
             grassTexture = Content.Load<Texture2D>("grass_motion_simple_background");
             grassyDirtTexture = Content.Load<Texture2D>("grassy_dirt");

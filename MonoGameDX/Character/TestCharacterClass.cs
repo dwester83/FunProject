@@ -20,19 +20,23 @@ namespace Game_DX.Character
         private CharacterTextureFactory TextureFactory = CharacterTextureFactory.GetInstance();
         
 
-        public TestCharacterClass(Sprite sprite, KeyboardListener listener,GraphicsDevice device, Texture2D glovesTexture)
+        public TestCharacterClass(Sprite sprite, KeyboardListener listener, Texture2D glovesTexture, Texture2D chestTexture
+                                , Texture2D pantsTexture, Texture2D helmetTexture, Texture2D cloakTexture, Texture2D bootsTexture, Texture2D emptyTexture)
         {
             
             TextureFactory.PlayerTexture = sprite.Texture;
             TextureFactory.GlovesTexture = glovesTexture;
+            TextureFactory.ChestTexture = chestTexture;
+            TextureFactory.PantsTexture = pantsTexture; //emptyTexture;
+            TextureFactory.HelmetTexture = helmetTexture;
+            TextureFactory.CloakTexture = cloakTexture;
+            TextureFactory.BootsTexture = bootsTexture;
+            
             listener.AddSubscriber(this);
             CharacterSprite = sprite;
             Velocity = Vector2.Zero;
             CharacterSize = 4;
             TextureFactory.PlayerHairColor = Color.Purple;
-            TextureFactory.GlovesPrimaryColor = Color.Red;
-            TextureFactory.GlovesSecondaryColor = Color.Black;
-            TextureFactory.Target = new RenderTarget2D(device, sprite.Texture.Width, sprite.Texture.Height);
             
         }
 

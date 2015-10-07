@@ -75,6 +75,14 @@
     <Content Include="Content\grassy_dirt.png" />
     <Content Include="Content\grass_motion.png" />
     <Content Include="Content\grass_motion_simple_background.png" />
+    <Content Include="Content\test_character\test_character_body.png" />
+    <Content Include="Content\test_character\test_character_boots.png" />
+    <Content Include="Content\test_character\test_character_chest.png" />
+    <Content Include="Content\test_character\test_character_cloak.png" />
+    <Content Include="Content\test_character\test_character_empty.png" />
+    <Content Include="Content\test_character\test_character_gloves.png" />
+    <Content Include="Content\test_character\test_character_helmet.png" />
+    <Content Include="Content\test_character\test_character_pants.png" />
     <Content Include="Content\test_character_texture.png" />
     <Content Include="Content\test_gloves.png" />
     <Content Include="Icon.ico" />
