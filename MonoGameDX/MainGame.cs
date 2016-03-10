@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using Game_DX.Input;
 using Game_DX.Character;
@@ -32,7 +33,7 @@ namespace Game_DX
         Texture2D testEmptyTexture;
         TestCharacterClass testCharacter;
 
-
+        Song song;
 
         Map map;
         KeyboardListener keyboardListener;
@@ -46,13 +47,15 @@ namespace Game_DX
         public MainGame() : base()
         {
             graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+
             // If we do a settings screen, this stuff can be moved to a method there and just called here.
             graphics.PreferredBackBufferWidth = ConfigManager.Instance.GraphicsWidth;
             graphics.PreferredBackBufferHeight = ConfigManager.Instance.GraphicsHeight;
             graphics.IsFullScreen = ConfigManager.Instance.FullScreen;
             graphics.ApplyChanges();
             keyboardListener = new KeyboardListener();
-            Content.RootDirectory = "Content";
+
         }
 
         /// <summary>
@@ -65,7 +68,7 @@ namespace Game_DX
         {
             // TODO: Add your initialization logic here
             base.Initialize();
-            
+
             ball = new Sprite(ballTexture, 1, 12, 4);
             map = new Map(30, 50, grassTexture, grassyDirtTexture);
             testCharacterSprite = new Sprite(testCharacterTexture, 1, 1, 4);
@@ -73,7 +76,7 @@ namespace Game_DX
                                                 , testPantsTexture, testHelmetTexture, testCloakTexture, testBootsTexture, testEmptyTexture);
             map.Initialize();
             IsMouseVisible = true;
-            
+
         }
 
         /// <summary>
@@ -83,7 +86,7 @@ namespace Game_DX
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
             testCharacterTexture = Content.Load<Texture2D>(@"test_character\test_character_body");
             testGlovesTexture = Content.Load<Texture2D>(@"test_character\test_character_gloves");
@@ -100,6 +103,8 @@ namespace Game_DX
             bwTexture = Content.Load<Texture2D>("black_white");
             // TODO: use this.Content to load your game content here
 
+            this.song = Content.Load<Song>(@"Music\music");
+            MediaPlayer.Play(song); // Media player has Volume and other options I'll move into a wrapper class so we don't need to bother with the minor things and create on the fly.
         }
 
         /// <summary>
@@ -127,7 +132,7 @@ namespace Game_DX
             //ball.moveDirection(Keyboard.GetState().GetPressedKeys());
             //ball.Update();
             testCharacter.Update(gameTime);
-            
+
 
             // Map delay needs to be built into the map... Sorry Josh.
             map.Update();
